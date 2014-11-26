@@ -1,8 +1,10 @@
 DROP TABLE IF EXISTS Chat;
+DROP TABLE IF EXISTS Inventory;
 DROP TABLE IF EXISTS PurchaseHistory;
 DROP TABLE IF EXISTS Player;
 DROP TABLE IF EXISTS LocationPriceInfo;
 DROP TABLE IF EXISTS Item;
+DROP TABLE IF EXISTS TravelInfo;
 DROP TABLE IF EXISTS Location;
 
 
@@ -13,10 +15,20 @@ CREATE TABLE Location(
 	PRIMARY KEY (LocationID)
 );
 
+CREATE TABLE TravelInfo(
+	StartLoc int,
+	EndLoc int,
+	Distance int,
+	PRIMARY KEY(StartLoc,EndLoc),
+	FOREIGN KEY(StartLoc) REFERENCES Location(LocationID),
+	FOREIGN KEY(EndLoc) REFERENCES Location(LocationID)
+);
+
 CREATE TABLE Item(
 	ItemID int,
-	ItemName varchar(20),
-	ItemDescription varchar(20),
+	Name varchar(20),
+	Description varchar(20),
+	BasePrice int,
 	PRIMARY KEY (ItemID)
 );
 
@@ -34,25 +46,18 @@ CREATE TABLE Player(
 	PlayerID int,
 	Name varchar(20),
 	CurrentLocation int,
-	Coin int,
-	numArmor int,
-	numCommonSpice int,
-	numGroceries int,
-	numIron int,
-	numLeather int,
-	numOil int,
-	numPaper int,
-	numPearls int,
-	numPerfume int,
-	numRareSpice int,
-	numSalt int,
-	numSilk int,
-	numSword int,
-	numTools int,
-	numWax int,
-	numWine int,
+	Coin int DEFAULT 1000,
 	PRIMARY KEY(PlayerID),
 	FOREIGN KEY(CurrentLocation) REFERENCES Location(LocationID)
+);
+
+CREATE TABLE Inventory(
+	PlayerID int,
+	ItemID int,
+	Quantity int,
+	PRIMARY KEY(PlayerID,ItemID),
+	FOREIGN KEY(PlayerID) REFERENCES Player(PlayerID),
+	FOREIGN KEY(ItemID) REFERENCES Item(ItemID)
 );
 
 CREATE TABLE PurchaseHistory(

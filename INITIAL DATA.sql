@@ -1,4 +1,5 @@
 DELETE FROM Chat;
+DELETE FROM Inventory;
 DELETE FROM PurchaseHistory;
 DELETE FROM Player;
 DELETE FROM LocationPriceInfo;
