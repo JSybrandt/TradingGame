@@ -63,6 +63,8 @@ namespace ClientWindow {
 	private: DBConnection* dbconn;
 	private: array<String^>^ tempArray;
 	private: String^ username;
+	private: String^ loc;
+	private: String^ coins;
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::Button^  button2;
@@ -70,6 +72,10 @@ namespace ClientWindow {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  dataGridViewTextBoxColumn2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Sell;
 	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::Label^  label4;
+	private: System::Windows::Forms::Label^  label6;
+	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::Label^  label7;
 
 
 
@@ -89,9 +95,12 @@ namespace ClientWindow {
 		{
 			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
@@ -111,7 +120,7 @@ namespace ClientWindow {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView2))->BeginInit();
@@ -134,6 +143,10 @@ namespace ClientWindow {
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->label7);
+			this->tabPage1->Controls->Add(this->label6);
+			this->tabPage1->Controls->Add(this->label5);
+			this->tabPage1->Controls->Add(this->label4);
 			this->tabPage1->Controls->Add(this->label3);
 			this->tabPage1->Controls->Add(this->label2);
 			this->tabPage1->Controls->Add(this->label1);
@@ -150,6 +163,42 @@ namespace ClientWindow {
 			this->tabPage1->Text = L"Trade";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			this->tabPage1->Click += gcnew System::EventHandler(this, &MyForm::tabPage1_Click);
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(582, 8);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(39, 13);
+			this->label6->TabIndex = 10;
+			this->label6->Text = L"Coins: ";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(445, 8);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(0, 13);
+			this->label5->TabIndex = 9;
+			this->label5->Text = L"Unknown";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(385, 8);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(54, 13);
+			this->label4->TabIndex = 8;
+			this->label4->Text = L"Location: ";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(352, 49);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(54, 13);
+			this->label3->TabIndex = 7;
+			this->label3->Text = L"New York";
 			// 
 			// label2
 			// 
@@ -314,7 +363,6 @@ namespace ClientWindow {
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->Location = System::Drawing::Point(0, 0);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(782, 240);
@@ -322,14 +370,14 @@ namespace ClientWindow {
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			// 
-			// label3
+			// label7
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(352, 49);
-			this->label3->Name = L"Town Name";
-			this->label3->Size = System::Drawing::Size(35, 13);
-			this->label3->TabIndex = 7;
-			this->label3->Text = L"New York";
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(627, 8);
+			this->label7->Name = L"ActualCoins";
+			this->label7->Size = System::Drawing::Size(35, 13);
+			this->label7->TabIndex = 11;
+			this->label7->Text = L"Unknown";
 			// 
 			// MyForm
 			// 
@@ -363,23 +411,38 @@ namespace ClientWindow {
 	private: System::Void toolStrip1_ItemClicked(System::Object^  sender, System::Windows::Forms::ToolStripItemClickedEventArgs^  e) {
 			 }
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-				 table res = dbconn->runQuery("select * from testTable");
-				 this->dataGridView1->Rows->Clear();
-				 for(row r : res)
-				 {
-					 for(string s : r) {
-						 String^ str = gcnew String(s.c_str());
-						 this->dataGridView1->Rows->Add(str);
+				 table res = dbconn->runQuery("select * from Player");
+
+				 //array<String^>^ strings = gcnew array<String^>(res.size());
+				 //this->dataGridView1->Rows->Clear();
+				 //for(row r : res) {
+				 // int count = 0;
+				 // for(string s : r) {
+				 //	 String^ str = gcnew String(s.c_str());
+				 //	 if(count < res.size())
+				 //		 strings[count] = str;
+				 //	 count++;
+				 // }
+				 // //dataGridView1->Rows[count];
+				 // this->dataGridView1->Rows->Add(strings);
+				 //}
+
+				 for(int i = 0; i < res.size(); i++) {
+					 string s = res.at(i).at(1);
+					 String^ str = gcnew String(s.c_str());
+					 if(this->toolStripTextBox1->Text == str) {
+						 username = this->toolStripTextBox1->Text;
+						 s = res.at(i).at(3);
+						 this->label7->Text = gcnew String(s.c_str()); //Location
+						 s = res.at(i).at(2);
+						 this->label5->Text = gcnew String(s.c_str()); //Coins
+						 this->progressBar1->Value = 100;
+						 return;
 					 }
 				 }
 
-				 /*if(this->toolStripTextBox1->Text == "Firenight") {
-					 username = this->toolStripTextBox1->Text;
-					 this->progressBar1->Value = 100;
-
-				 }
-				 else
-					 this->progressBar1->Value = 0;*/
+				 this->progressBar1->Value = 0;
+				 username = "Unknown";
 			 }
 	private: System::Void OnResize(System::Object^  sender, System::EventArgs^  e) {
 
@@ -402,6 +465,6 @@ namespace ClientWindow {
 					 this->button2_Click(sender, e);
 				 }
 			 }
-			 
+
 	};
 }
