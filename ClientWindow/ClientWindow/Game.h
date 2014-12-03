@@ -37,4 +37,7 @@ public:
 	Town& getCurrentLocation();
 	
 	void setCurrentLocation(int townID);
+
+	vector<Item>*getItemReference(){return &items;}
+
 };

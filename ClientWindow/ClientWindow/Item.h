@@ -24,4 +24,5 @@ public:
 		return i.defaultCost < defaultCost;
 	}
 	
+	std::string getName(){return name;}
 };

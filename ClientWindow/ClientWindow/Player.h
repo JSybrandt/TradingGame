@@ -26,5 +26,7 @@ public:
 	Player(){};
 	Player(std::string,vector<Item> itemReference);
 
+	Inventory* getInventory(){return &inv;}
+
 	
 };
