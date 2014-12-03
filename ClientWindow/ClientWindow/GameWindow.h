@@ -50,8 +50,8 @@ namespace ClientWindow {
 	private: System::Windows::Forms::TabPage^  tabHistory;
 	private: System::Windows::Forms::DataGridView^  dgvHistory;
 	private: System::Windows::Forms::TabPage^  tabGame;
-	private: System::Windows::Forms::Button^  buttLoad;
-	private: System::Windows::Forms::Button^  buttSave;
+
+
 	private: System::Windows::Forms::NumericUpDown^  nudSellNumb;
 	private: System::Windows::Forms::ComboBox^  cbSellItem;
 	private: System::Windows::Forms::Label^  label7;
@@ -70,6 +70,9 @@ namespace ClientWindow {
 	private: System::Windows::Forms::DataGridView^  dgvPlayerInv;
 	private: System::Windows::Forms::DataGridView^  dgvTownInfo;
 	private: System::Windows::Forms::TabControl^  gameTab;
+	private: System::Windows::Forms::Button^  buttTravel;
+	private: System::Windows::Forms::Button^  buttSell;
+	private: System::Windows::Forms::Button^  buttBuy;
 
 
 
@@ -110,8 +113,6 @@ namespace ClientWindow {
 			this->tabHistory = (gcnew System::Windows::Forms::TabPage());
 			this->dgvHistory = (gcnew System::Windows::Forms::DataGridView());
 			this->tabGame = (gcnew System::Windows::Forms::TabPage());
-			this->buttLoad = (gcnew System::Windows::Forms::Button());
-			this->buttSave = (gcnew System::Windows::Forms::Button());
 			this->nudSellNumb = (gcnew System::Windows::Forms::NumericUpDown());
 			this->cbSellItem = (gcnew System::Windows::Forms::ComboBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -130,6 +131,9 @@ namespace ClientWindow {
 			this->dgvPlayerInv = (gcnew System::Windows::Forms::DataGridView());
 			this->dgvTownInfo = (gcnew System::Windows::Forms::DataGridView());
 			this->gameTab = (gcnew System::Windows::Forms::TabControl());
+			this->buttBuy = (gcnew System::Windows::Forms::Button());
+			this->buttSell = (gcnew System::Windows::Forms::Button());
+			this->buttTravel = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			this->tabHistory->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvHistory))->BeginInit();
@@ -191,8 +195,9 @@ namespace ClientWindow {
 			// 
 			// tabGame
 			// 
-			this->tabGame->Controls->Add(this->buttLoad);
-			this->tabGame->Controls->Add(this->buttSave);
+			this->tabGame->Controls->Add(this->buttTravel);
+			this->tabGame->Controls->Add(this->buttSell);
+			this->tabGame->Controls->Add(this->buttBuy);
 			this->tabGame->Controls->Add(this->nudSellNumb);
 			this->tabGame->Controls->Add(this->cbSellItem);
 			this->tabGame->Controls->Add(this->label7);
@@ -217,25 +222,6 @@ namespace ClientWindow {
 			this->tabGame->TabIndex = 0;
 			this->tabGame->Text = L"Game";
 			this->tabGame->UseVisualStyleBackColor = true;
-			// 
-			// buttLoad
-			// 
-			this->buttLoad->Location = System::Drawing::Point(344, 42);
-			this->buttLoad->Name = L"buttLoad";
-			this->buttLoad->Size = System::Drawing::Size(75, 23);
-			this->buttLoad->TabIndex = 18;
-			this->buttLoad->Text = L"Load";
-			this->buttLoad->UseVisualStyleBackColor = true;
-			this->buttLoad->Click += gcnew System::EventHandler(this, &GameWindow::buttLoad_Click);
-			// 
-			// buttSave
-			// 
-			this->buttSave->Location = System::Drawing::Point(344, 13);
-			this->buttSave->Name = L"buttSave";
-			this->buttSave->Size = System::Drawing::Size(75, 23);
-			this->buttSave->TabIndex = 17;
-			this->buttSave->Text = L"Save";
-			this->buttSave->UseVisualStyleBackColor = true;
 			// 
 			// nudSellNumb
 			// 
@@ -390,6 +376,33 @@ namespace ClientWindow {
 			this->gameTab->SelectedIndex = 0;
 			this->gameTab->Size = System::Drawing::Size(755, 558);
 			this->gameTab->TabIndex = 3;
+			// 
+			// buttBuy
+			// 
+			this->buttBuy->Location = System::Drawing::Point(11, 103);
+			this->buttBuy->Name = L"buttBuy";
+			this->buttBuy->Size = System::Drawing::Size(248, 23);
+			this->buttBuy->TabIndex = 4;
+			this->buttBuy->Text = L"BUY";
+			this->buttBuy->UseVisualStyleBackColor = true;
+			// 
+			// buttSell
+			// 
+			this->buttSell->Location = System::Drawing::Point(491, 103);
+			this->buttSell->Name = L"buttSell";
+			this->buttSell->Size = System::Drawing::Size(248, 23);
+			this->buttSell->TabIndex = 17;
+			this->buttSell->Text = L"SELL";
+			this->buttSell->UseVisualStyleBackColor = true;
+			// 
+			// buttTravel
+			// 
+			this->buttTravel->Location = System::Drawing::Point(491, 42);
+			this->buttTravel->Name = L"buttTravel";
+			this->buttTravel->Size = System::Drawing::Size(248, 23);
+			this->buttTravel->TabIndex = 18;
+			this->buttTravel->Text = L"TRAVEL";
+			this->buttTravel->UseVisualStyleBackColor = true;
 			// 
 			// GameWindow
 			// 

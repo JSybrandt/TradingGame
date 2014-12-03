@@ -70,3 +70,16 @@ void Game::simulateWorld()
 		}
 	}
 }
+
+Town& Game::getCurrentLocation()
+{
+	return towns[currentLocation];
+}
+
+void Game::setCurrentLocation(int loc)
+{
+	if(loc > 0 && loc < towns.size()&&towns[loc].canTravelTo)
+	{
+		currentLocation = loc;
+	}
+}

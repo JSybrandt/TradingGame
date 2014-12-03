@@ -23,6 +23,8 @@ private:
 	vector<Item>items;
 	Player player;
 
+	int currentLocation;
+
 public:
 	
 	Game();
@@ -31,4 +33,8 @@ public:
 
 	//runs garbage and moves items around
 	void simulateWorld();
+
+	Town& getCurrentLocation();
+	
+	void setCurrentLocation(int townID);
 };

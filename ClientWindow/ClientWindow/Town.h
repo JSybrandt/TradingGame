@@ -17,7 +17,7 @@ private:
 	map<Item,pair<int,int> > transactionLog;	//maps item to net buys / sells
 	map<Item,int> prices; //the determined value of the item, not nessesarily the buy or sell price
 	vector<Item>itemReference;
-	bool canTravelTo;
+	
 
 	
 	
@@ -42,5 +42,5 @@ public:
 	//returns the cost of the order
 	int sell(Item i, int requestedAmmount);
 
-
+	bool canTravelTo;
 };
