@@ -4,6 +4,7 @@
 #include"Game.h"
 #include"Inventory.h"
 #include"Item.h"
+#include "Town.h"
 
 namespace ClientWindow {
 
@@ -405,17 +406,86 @@ namespace ClientWindow {
 		private: 
 			Player* player;
 			Game* game;
+			Town* town;
 
 private: System::Void buttLoad_Click(System::Object^  sender, System::EventArgs^  e) {
 			
 		 }
 private: System::Void buttTravel_Click(System::Object^  sender, System::EventArgs^  e) {
+			/*int selectedIndex = cbLocationSelection->SelectedIndex;
+			switch (selectedIndex)
+			{
+			case 0: 
+				cbBuyItem->Items->Add("HI");
+				break;
+			case 1:
+				cbBuyItem->Items->Add("Hi");
+				break;
+			case 2:
+				cbBuyItem->Items->Add("Hi");
+				break;
+			case 3:
+				cbBuyItem->Items->Add("Hi");
+				break;
+			case 4:
+				cbBuyItem->Items->Add("Hi");
+				break;
+			case 5:
+				cbBuyItem->Items->Add("Hi");
+				break;
+			case 6:
+				cbBuyItem->Items->Add("Hi");
+				break;
+			case 7:
+				cbBuyItem->Items->Add("Hi");
+				break;
+			case 8:
+				cbBuyItem->Items->Add("Hi");
+				break;
+			case 9:
+				cbBuyItem->Items->Add("Hi");
+				break;
+
+			}
+*/
+			cbBuyItem->Items->Add("Sword");
+			cbBuyItem->Items->Add("Armor");
+			cbBuyItem->Items->Add("Tools");
+			cbBuyItem->Items->Add("Iron");
+			cbBuyItem->Items->Add("Leather");
+			cbBuyItem->Items->Add("Common-Spices");
+			cbBuyItem->Items->Add("Salt");
+			cbBuyItem->Items->Add("Groceries");
+			cbBuyItem->Items->Add("Wine");
+			cbBuyItem->Items->Add("Rare-Spices");
+			cbBuyItem->Items->Add("Paper");
+			cbBuyItem->Items->Add("Oil");
+			cbBuyItem->Items->Add("Wax");
+			cbBuyItem->Items->Add("Perfume");
+			cbBuyItem->Items->Add("Silk");
+			cbBuyItem->Items->Add("Pearls");
+
+			Controls->Add(cbBuyItem);
 
 		 }
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
 			player = new Player();
 			game = new Game();
 			UpdatePlayerDGV();
+
+			cbLocationSelection->Items->Add("Newsham");
+			cbLocationSelection->Items->Add("Wolfwater");
+			cbLocationSelection->Items->Add("Oakheart");
+			cbLocationSelection->Items->Add("Aberdeen");
+			cbLocationSelection->Items->Add("Dornwich");
+			cbLocationSelection->Items->Add("Snake's Canyon");
+			cbLocationSelection->Items->Add("Icemeet");
+			cbLocationSelection->Items->Add("Squall's End");
+			cbLocationSelection->Items->Add("Everwinter");
+			cbLocationSelection->Items->Add("Dragontail");	
+
+			Controls->Add(cbLocationSelection);
+
 
 		 }
 
