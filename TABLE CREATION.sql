@@ -48,7 +48,8 @@ CREATE TABLE Player(
 	CurrentLocation int,
 	Coin int DEFAULT 1000,
 	PRIMARY KEY(PlayerID),
-	FOREIGN KEY(CurrentLocation) REFERENCES Location(LocationID)
+	FOREIGN KEY(CurrentLocation) REFERENCES Location(LocationID),
+	UNIQUE(Name)
 );
 
 CREATE TABLE Inventory(
