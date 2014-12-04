@@ -8,9 +8,8 @@ using std::string;
 
 Game::Game()
 	{
-		
+		count = 0;
 		dayCount = 0;
-
 		items.push_back(Item("Sword",200));
 		items.push_back(Item("Armor",175));
 		items.push_back(Item("Tools",45));
@@ -77,26 +76,36 @@ string Game::getRandomEvent(){
 
 void Game::EventEffect(string s){
 	string event = s;
+	Town town = getCurrentLocation();
 	if(event == "War" ){
 		getCurrentLocation().canTravelTo = false;
 	}
 	else if(event == "Famine"){
 		getCurrentLocation();
-		player.getInventory().decreaseNumberOf(Item("Grocery",0), 100);
+		town.getInventory().decreaseNumberOf(items[7], 100);
+
 	}
 	else if(event == "Rade"){
 		getCurrentLocation();
-		player.getInventory().decreaseNumberOf(Item("Sword",0), 100);
-		player.getInventory().decreaseNumberOf(Item("Armor",0), 100);
-		player.getInventory().decreaseNumberOf(Item("Tools",0), 100);
-	}
-	else if(event == "Birds Attack"){
-		getCurrentLocation();
-		player.getInventory().decreaseNumberOf(Item("Pearls",0), 100);
-		player.getInventory().decreaseNumberOf(Item("Silk",0), 100);
-		player.getInventory().decreaseNumberOf(Item("Perfume",0), 100);
+		town.getInventory().decreaseNumberOf(items[0], 100);
+		town.getInventory().decreaseNumberOf(items[1], 100);
+		town.getInventory().decreaseNumberOf(items[2], 100);
 
 	}
+	else if(event == "Birds attack"){
+		getCurrentLocation();
+		town.getInventory().decreaseNumberOf(items[15], 100);
+		town.getInventory().decreaseNumberOf(items[14], 100);
+		town.getInventory().decreaseNumberOf(items[13], 100);
+
+	}
+	if(count >= 2){
+		for(int i = 0; i < towns.size(); i++){
+			towns[i].canTravelTo = true;
+			count = 0;
+		}
+	}
+	count++;
 }
 
 

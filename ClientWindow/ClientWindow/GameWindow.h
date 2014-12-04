@@ -5,6 +5,7 @@
 #include"Inventory.h"
 #include"Item.h"
 #include "Town.h"
+#include <time.h>
 
 #include <string>
 
@@ -529,7 +530,7 @@ private: System::Void buttTravel_Click(System::Object^  sender, System::EventArg
 
 			 //TODO: actually travel
 			UpdateAll();
-
+			
 			string event = game->getRandomEvent();
 			String ^EventName = gcnew String(event.c_str());
 
@@ -540,6 +541,8 @@ private: System::Void buttTravel_Click(System::Object^  sender, System::EventArg
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
 			game = new Game();
 			
+			rand() %100;
+
 			UpdateAll();
 
 			cbLocationSelection->Items->Add("Newsham");

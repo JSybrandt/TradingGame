@@ -39,6 +39,8 @@ private:
 
 	int dayCount;
 
+	int count;
+
 public:
 	
 	Game();
