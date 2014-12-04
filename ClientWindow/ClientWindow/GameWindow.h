@@ -136,13 +136,13 @@ namespace ClientWindow {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dgvPlayerInv = (gcnew System::Windows::Forms::DataGridView());
+			this->PlayerItemCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->PlayerQuantityCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->dgvTownInfo = (gcnew System::Windows::Forms::DataGridView());
 			this->TownItemCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->TownQuantityCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->TownBuyCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->TownSellCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->PlayerItemCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->PlayerQuantityCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSellNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudBuyNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvPlayerInv))->BeginInit();
@@ -176,6 +176,7 @@ namespace ClientWindow {
 			this->buttBuy->TabIndex = 4;
 			this->buttBuy->Text = L"BUY";
 			this->buttBuy->UseVisualStyleBackColor = true;
+			this->buttBuy->Click += gcnew System::EventHandler(this, &GameWindow::buttBuy_Click);
 			// 
 			// nudSellNumb
 			// 
@@ -315,6 +316,16 @@ namespace ClientWindow {
 			this->dgvPlayerInv->Size = System::Drawing::Size(288, 392);
 			this->dgvPlayerInv->TabIndex = 0;
 			// 
+			// PlayerItemCol
+			// 
+			this->PlayerItemCol->HeaderText = L"Item";
+			this->PlayerItemCol->Name = L"PlayerItemCol";
+			// 
+			// PlayerQuantityCol
+			// 
+			this->PlayerQuantityCol->HeaderText = L"Quantity";
+			this->PlayerQuantityCol->Name = L"PlayerQuantityCol";
+			// 
 			// dgvTownInfo
 			// 
 			this->dgvTownInfo->AllowUserToAddRows = false;
@@ -353,16 +364,6 @@ namespace ClientWindow {
 			// 
 			this->TownSellCol->HeaderText = L"Sell Price";
 			this->TownSellCol->Name = L"TownSellCol";
-			// 
-			// PlayerItemCol
-			// 
-			this->PlayerItemCol->HeaderText = L"Item";
-			this->PlayerItemCol->Name = L"PlayerItemCol";
-			// 
-			// PlayerQuantityCol
-			// 
-			this->PlayerQuantityCol->HeaderText = L"Quantity";
-			this->PlayerQuantityCol->Name = L"PlayerQuantityCol";
 			// 
 			// GameWindow
 			// 
@@ -411,6 +412,10 @@ namespace ClientWindow {
 private: System::Void buttLoad_Click(System::Object^  sender, System::EventArgs^  e) {
 			
 		 }
+
+private: System::Void buttBuy_Click(System::Object^  sender, System::EventArgs^  e) {
+			
+}
 private: System::Void buttTravel_Click(System::Object^  sender, System::EventArgs^  e) {
 			/*int selectedIndex = cbLocationSelection->SelectedIndex;
 			switch (selectedIndex)
@@ -466,6 +471,12 @@ private: System::Void buttTravel_Click(System::Object^  sender, System::EventArg
 			cbBuyItem->Items->Add("Pearls");
 
 			Controls->Add(cbBuyItem);
+
+			string event = game->getRandomEvent();
+			String ^EventName = gcnew String(event.c_str());
+
+
+			MessageBox::Show( "Event happened!!  " + EventName );
 
 		 }
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
