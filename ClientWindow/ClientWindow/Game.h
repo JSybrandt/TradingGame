@@ -18,12 +18,15 @@ private:
 	static const int MAX_STARTING_QUANTITY = 100;
 	static const int NUMBER_OF_STARTING_ITEMS = 5;
 	static const int MAX_SIMULATED_TRANSACTIONS = 1000;
+	static const int STARTING_GOLD = 50;
 
 	vector<Town>towns;
 	vector<Item>items;
 	Player player;
 
 	int currentLocation;
+
+	int dayCount;
 
 public:
 	
@@ -40,4 +43,11 @@ public:
 
 	vector<Item>*getItemReference(){return &items;}
 
+	Player& getPlayer(){return player;}
+
+	int getDayCount(){return dayCount;}
+
+	void attemptToBuy(Item i, int ammount);
+
+	void attemptToSell(Item i, int ammount);
 };

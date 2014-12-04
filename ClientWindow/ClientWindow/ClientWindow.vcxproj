@@ -96,6 +96,7 @@
     <ClInclude Include="Town.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Inventory.h" />
   </ItemGroup>
   <ItemGroup>
