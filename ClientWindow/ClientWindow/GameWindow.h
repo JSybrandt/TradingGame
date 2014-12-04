@@ -532,43 +532,31 @@ private: System::Void buttLoad_Click(System::Object^  sender, System::EventArgs^
 
 private: System::Void buttTravel_Click(System::Object^  sender, System::EventArgs^  e) {
 
-			String ^ selected = cbLocationSelection->Text;
-			std::string selStd;
-			MarshalString(selected,selStd);
+			 try{
+				String ^ selected = cbLocationSelection->Text;
+				std::string selStd;
+				MarshalString(selected,selStd);
 
-			int id = game->getLocationID(selStd);
+				int id = game->getLocationID(selStd);
 
-			game->setCurrentLocation(id);
+				game->setCurrentLocation(id);
+ 
 
-			 //TODO: actually travel
-			UpdateAll();
+				string event = game->getRandomEvent();
+				String ^EventName = gcnew String(event.c_str());
 
-			string event = game->getRandomEvent();
-			String ^EventName = gcnew String(event.c_str());
+				MessageBox::Show( "Event happened!!  " + EventName );
 
+				UpdateAll();
 
-			MessageBox::Show( "Event happened!!  " + EventName );
-
+			 }catch(...){//do nothing
+			 }
 		 }
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
 			game = new Game();
 			
 			UpdateAll();
-
-			cbLocationSelection->Items->Add("Newsham");
-			cbLocationSelection->Items->Add("Wolfwater");
-			cbLocationSelection->Items->Add("Oakheart");
-			cbLocationSelection->Items->Add("Aberdeen");
-			cbLocationSelection->Items->Add("Dornwich");
-			cbLocationSelection->Items->Add("Snake's Canyon");
-			cbLocationSelection->Items->Add("Icemeet");
-			cbLocationSelection->Items->Add("Squall's End");
-			cbLocationSelection->Items->Add("Everwinter");
-			cbLocationSelection->Items->Add("Dragontail");	
-
-			Controls->Add(cbLocationSelection);
-
-
+			
 		 }
 
 
@@ -582,7 +570,7 @@ private: System::Void UpdatePlayerDGV()
 				DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
 
 				String^ itemName = gcnew String(i.getName().c_str());
-				String^ itemNumb = Convert::ToString(game->getPlayer().getInventory().getNumberOf(i));
+				String^ itemNumb = Convert::ToString(game->getPlayer().getNumberOf(i));
 
 				c1->Value = itemName;
 				c2->Value = itemNumb;
@@ -599,7 +587,7 @@ private: System::Void UpdateTownDGV()
 			dgvTownInfo->Rows->Clear();
 			for(Item i : *game->getItemReference())
 			{
-				if(game->getCurrentLocation().getInventory().getNumberOf(i) > 0)
+				if(game->getCurrentLocation().getNumberOf(i) > 0)
 				{
 					DataGridViewRow^ r = gcnew DataGridViewRow;
 					DataGridViewCell^ c1 = gcnew DataGridViewTextBoxCell;
@@ -608,7 +596,7 @@ private: System::Void UpdateTownDGV()
 					DataGridViewCell^ c4 = gcnew DataGridViewTextBoxCell;
 
 					String^ itemName = gcnew String(i.getName().c_str());
-					String^ itemNumb = Convert::ToString(game->getCurrentLocation().getInventory().getNumberOf(i));
+					String^ itemNumb = Convert::ToString(game->getCurrentLocation().getNumberOf(i));
 					String^ buyPrice = Convert::ToString(game->getCurrentLocation().getBuyPrice(i));
 					String^ sellPrice = Convert::ToString(game->getCurrentLocation().getSellPrice(i));
 
@@ -672,11 +660,25 @@ private: System::Void UpdateBuySellCB()
 
 			for(Item i : *game->getItemReference())
 			{
-				if(game->getCurrentLocation().getInventory().getNumberOf(i) > 0)
+				if(game->getCurrentLocation().getNumberOf(i) > 0)
 				{
 					String^ item = gcnew String(i.getName().c_str());
 					cbBuyItem->Items->Add(item);
 					cbSellItem->Items->Add(item);
+				}
+			}
+		 }
+
+private: System::Void UpdateTravelCB()
+		 {
+			cbLocationSelection->Items->Clear();
+
+			for(Town &i : game->getTowns())
+			{
+				if(i.canTravelTo)
+				{
+					String^ str = gcnew String(i.getName().c_str());
+					cbLocationSelection->Items->Add(str);
 				}
 			}
 		 }
@@ -695,6 +697,7 @@ private: System::Void UpdateAll()
 			UpdatePlayerDGV();
 			UpdateTownDGV();
 			UpdateHistoryDGV();
+			UpdateTravelCB();
 		 }
 
 private: Item getItemFromBuyComboBox()
@@ -721,6 +724,7 @@ private: Item getItemFromSellComboBox()
 		 }
 private: System::Void buttBuy_Click(System::Object^  sender, System::EventArgs^  e) {
 
+			 try{
 			 Item i = getItemFromBuyComboBox();
 
 			 int amt = Convert::ToInt32(nudBuyNumb->Value);
@@ -731,8 +735,11 @@ private: System::Void buttBuy_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 
 			 UpdateAll();
+			 }catch(...){//donothing
+			 }
 		 }
 private: System::Void buttSell_Click(System::Object^  sender, System::EventArgs^  e) {
+			 try{
 			 Item i = getItemFromSellComboBox();
 
 			 int amt = Convert::ToInt32(nudSellNumb->Value);
@@ -743,7 +750,11 @@ private: System::Void buttSell_Click(System::Object^  sender, System::EventArgs^
 			 }
 
 			 UpdateAll();
+			 }catch(...){//do nothing
+			 }
 		 }
+
+
 
 void MarshalString ( String ^ s, string& os )
 {

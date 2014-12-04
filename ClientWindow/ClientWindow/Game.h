@@ -66,4 +66,6 @@ public:
 	void attemptToSell(Item i, int ammount);
 
 	int getLocationID(string name);
+
+	vector<Town>& getTowns(){return towns;}
 };

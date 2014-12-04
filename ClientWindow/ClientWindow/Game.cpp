@@ -64,7 +64,7 @@ Game::Game()
 
 void Game::giveTownRandomItems(Town& t)
 {
-	t.getInventory().increaseNumberOf(items[rand()%items.size()],rand()%MAX_STARTING_QUANTITY);
+	t.increaseNumberOf(items[rand()%items.size()],rand()%MAX_STARTING_QUANTITY);
 }
 
 string Game::getRandomEvent(){
@@ -82,19 +82,19 @@ void Game::EventEffect(string s){
 	}
 	else if(event == "Famine"){
 		getCurrentLocation();
-		player.getInventory().decreaseNumberOf(Item("Grocery",0), 100);
+		player.decreaseNumberOf(Item("Grocery",0), 100);
 	}
 	else if(event == "Rade"){
 		getCurrentLocation();
-		player.getInventory().decreaseNumberOf(Item("Sword",0), 100);
-		player.getInventory().decreaseNumberOf(Item("Armor",0), 100);
-		player.getInventory().decreaseNumberOf(Item("Tools",0), 100);
+		player.decreaseNumberOf(Item("Sword",0), 100);
+		player.decreaseNumberOf(Item("Armor",0), 100);
+		player.decreaseNumberOf(Item("Tools",0), 100);
 	}
 	else if(event == "Birds Attack"){
 		getCurrentLocation();
-		player.getInventory().decreaseNumberOf(Item("Pearls",0), 100);
-		player.getInventory().decreaseNumberOf(Item("Silk",0), 100);
-		player.getInventory().decreaseNumberOf(Item("Perfume",0), 100);
+		player.decreaseNumberOf(Item("Pearls",0), 100);
+		player.decreaseNumberOf(Item("Silk",0), 100);
+		player.decreaseNumberOf(Item("Perfume",0), 100);
 
 	}
 }
@@ -111,9 +111,9 @@ void Game::simulateWorld()
 		//it will go through if its a good deal, it will maybe go through if it's a bad deal
 		if(t1->getBuyPrice(item)<t2->getSellPrice(item) || (rand()%100 > 80))
 		{
-			if(t1->getInventory().getNumberOf(item) > 0)
+			if(t1->getNumberOf(item) > 0)
 			{
-				int ammount = rand()%(t1->getInventory().getNumberOf(item));
+				int ammount = rand()%(t1->getNumberOf(item));
 				t1->buy(item,ammount);
 				t2->sell(item,ammount);
 			}
@@ -133,14 +133,14 @@ Town& Game::getCurrentLocation()
 
 void Game::setCurrentLocation(int loc)
 {
-	if(loc > 0 && loc < towns.size()&&towns[loc].canTravelTo)
+	if(loc >= 0 && loc < towns.size()&&towns[loc].canTravelTo)
 	{
 		currentLocation = loc;
 		dayCount++;
 		simulateWorld();
 	}
-	//else
-		//throw new INVALID_ID;
+	else
+		throw new INVALID_ID;
 }
 
 void Game::attemptToBuy(Item i, int ammount)
@@ -150,7 +150,7 @@ void Game::attemptToBuy(Item i, int ammount)
 	{
 		getCurrentLocation().buy(i,ammount);
 		getPlayer().incrementGold(-cost);
-		getPlayer().getInventory().increaseNumberOf(i,ammount);
+		getPlayer().increaseNumberOf(i,ammount);
 
 		HistoryTuple h;
 		h.item = i;
@@ -163,18 +163,18 @@ void Game::attemptToBuy(Item i, int ammount)
 		it = getPlayer().getHistory().begin();
 		getPlayer().getHistory().insert(it, h);
 	}
-	//else
-		//throw new INVALID_ORDER;
+	else
+		throw new INVALID_ORDER;
 }
 
 void Game::attemptToSell(Item i, int ammount)
 {
-	if(player.getInventory().getNumberOf(i) >= ammount)
+	if(player.getNumberOf(i) >= ammount)
 	{
 		int cost = getCurrentLocation().getSellPrice(i)*ammount;
 		getCurrentLocation().sell(i,ammount);
 		getPlayer().incrementGold(cost);
-		getPlayer().getInventory().decreaseNumberOf(i,ammount);
+		getPlayer().decreaseNumberOf(i,ammount);
 
 		HistoryTuple h;
 		h.item = i;
@@ -187,8 +187,8 @@ void Game::attemptToSell(Item i, int ammount)
 		it = getPlayer().getHistory().begin();
 		getPlayer().getHistory().insert(it, h);
 	}
-	//else
-		//throw new INVALID_ORDER;
+	else
+		throw new INVALID_ORDER;
 }
 
 int Game::getLocationID(string name)
@@ -196,6 +196,6 @@ int Game::getLocationID(string name)
 	for(int i = 0; i < towns.size();i++)
 		if(towns[i].getName()==name)
 			return i;
-	//throw new INVALID_ID;
+	throw new INVALID_ID;
 	return -1;
 }
