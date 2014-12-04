@@ -59,6 +59,7 @@ Game::Game()
 
 		player.setGold(STARTING_GOLD);
 
+		//simulateWorld();
 	}
 
 void Game::giveTownRandomItems(Town& t)
@@ -76,13 +77,12 @@ string Game::getRandomEvent(){
 
 void Game::EventEffect(string s){
 	string event = s;
-	Town *t;
 	if(event == "War" ){
-		t->canTravelTo = false;
+		getCurrentLocation().canTravelTo = false;
 	}
 	else if(event == "Famine"){
 		getCurrentLocation();
-		player.getInventory().decreaseNumberOf(Item("grocery",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Grocery",0), 100);
 	}
 	else if(event == "Rade"){
 		getCurrentLocation();
@@ -111,10 +111,18 @@ void Game::simulateWorld()
 		//it will go through if its a good deal, it will maybe go through if it's a bad deal
 		if(t1->getBuyPrice(item)<t2->getSellPrice(item) || (rand()%100 > 80))
 		{
-			int ammount = rand()%(t1->getInventory().getNumberOf(item));
-			t1->buy(item,ammount);
-			t2->sell(item,ammount);
+			if(t1->getInventory().getNumberOf(item) > 0)
+			{
+				int ammount = rand()%(t1->getInventory().getNumberOf(item));
+				t1->buy(item,ammount);
+				t2->sell(item,ammount);
+			}
 		}
+	}
+
+	for(Town & t : towns)
+	{
+		t.refreshPrices();
 	}
 }
 
@@ -129,7 +137,10 @@ void Game::setCurrentLocation(int loc)
 	{
 		currentLocation = loc;
 		dayCount++;
+		simulateWorld();
 	}
+	//else
+		//throw new INVALID_ID;
 }
 
 void Game::attemptToBuy(Item i, int ammount)
@@ -141,6 +152,8 @@ void Game::attemptToBuy(Item i, int ammount)
 		getPlayer().incrementGold(-cost);
 		getPlayer().getInventory().increaseNumberOf(i,ammount);
 	}
+	//else
+		//throw new INVALID_ORDER;
 }
 
 void Game::attemptToSell(Item i, int ammount)
@@ -152,4 +165,15 @@ void Game::attemptToSell(Item i, int ammount)
 		getPlayer().incrementGold(cost);
 		getPlayer().getInventory().decreaseNumberOf(i,ammount);
 	}
+	//else
+		//throw new INVALID_ORDER;
+}
+
+int Game::getLocationID(string name)
+{
+	for(int i = 0; i < towns.size();i++)
+		if(towns[i].getName()==name)
+			return i;
+	//throw new INVALID_ID;
+	return -1;
 }

@@ -28,14 +28,16 @@ void Town::refreshPrices()
 
 void Town::updatePrice(Item i)
 {
+
 	//Todo: determine exactly how we want to do this
 	float numBought = transactionLog[i].numBought;
 	float numSold = transactionLog[i].numSold;
 	float numTransactions = numBought+numSold;
+	float noise = ((rand()%50)/100.0)+0.5;
 	if(numTransactions>0)
 	{
 		float popularity = ((numBought-numSold)/numTransactions);
-		prices[i] = prices[i] + prices[i]*popularity;
+		prices[i] = i.getDefaultCost() + (i.getDefaultCost()/2)*popularity*noise;
 	}
 }
 

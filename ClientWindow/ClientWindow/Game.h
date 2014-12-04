@@ -14,6 +14,12 @@ using std::map;
 #include<vector>
 using std::vector;
 
+#include<exception>
+using std::exception;
+
+class INVALID_ID: public exception{};
+class INVALID_ORDER: public exception{};
+
 class Game
 {
 private:
@@ -58,4 +64,6 @@ public:
 	void attemptToBuy(Item i, int ammount);
 
 	void attemptToSell(Item i, int ammount);
+
+	int getLocationID(string name);
 };

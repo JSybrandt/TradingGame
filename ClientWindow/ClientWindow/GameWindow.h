@@ -6,6 +6,10 @@
 #include"Item.h"
 #include "Town.h"
 
+#include <string>
+
+#include <msclr\marshal_cppstd.h>
+
 namespace ClientWindow {
 
 	using namespace System;
@@ -431,6 +435,14 @@ private: System::Void buttLoad_Click(System::Object^  sender, System::EventArgs^
 
 private: System::Void buttTravel_Click(System::Object^  sender, System::EventArgs^  e) {
 
+			String ^ selected = cbLocationSelection->Text;
+			std::string selStd;
+			MarshalString(selected,selStd);
+
+			int id = game->getLocationID(selStd);
+
+			game->setCurrentLocation(id);
+
 			 //TODO: actually travel
 			UpdateAll();
 
@@ -596,5 +608,15 @@ private: System::Void buttSell_Click(System::Object^  sender, System::EventArgs^
 
 			 UpdateAll();
 		 }
+
+void MarshalString ( String ^ s, string& os )
+{
+   using namespace Runtime::InteropServices;
+   const char* chars = 
+      (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+   os = chars;
+   Marshal::FreeHGlobal(IntPtr((void*)chars));
+}
+
 };
 }
