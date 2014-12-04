@@ -549,7 +549,7 @@ private: System::Void buttTravel_Click(System::Object^  sender, System::EventArg
 				UpdateAll();
 
 
-				if(game->getDayCount() == 3) {
+				if(game->getDayCount() == 30) {
 					MessageBox::Show("Game over! Your gold after 30 days was: " + (game->getPlayer().getGold()));
 					Application::Exit();
 				}
