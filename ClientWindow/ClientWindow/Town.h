@@ -28,6 +28,8 @@ private:
 	
 	void updatePrice(Item i);
 
+	float markup;
+
 public:
 
 	Town(std::string name, vector<Item> itemReference);

@@ -90,7 +90,6 @@
     <ClInclude Include="GameWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="HCFClientWindow.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Town.h" />

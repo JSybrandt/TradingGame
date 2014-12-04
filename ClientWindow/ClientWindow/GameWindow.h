@@ -574,20 +574,24 @@ private: System::Void UpdatePlayerDGV()
 			 dgvPlayerInv->Rows->Clear();
 			for(Item i : *game->getItemReference())
 			{
-				DataGridViewRow^ r = gcnew DataGridViewRow;
-				DataGridViewCell^ c1 = gcnew DataGridViewTextBoxCell;
-				DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
+				if(game->getPlayer().getNumberOf(i)>0)
+				{
+					DataGridViewRow^ r = gcnew DataGridViewRow;
+					DataGridViewCell^ c1 = gcnew DataGridViewTextBoxCell;
+					DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
 
-				String^ itemName = gcnew String(i.getName().c_str());
-				String^ itemNumb = Convert::ToString(game->getPlayer().getNumberOf(i));
+					String^ itemName = gcnew String(i.getName().c_str());
+					String^ itemNumb = Convert::ToString(game->getPlayer().getNumberOf(i));
 
-				c1->Value = itemName;
-				c2->Value = itemNumb;
 
-				r->Cells->Add(c1);
-				r->Cells->Add(c2);
+					c1->Value = itemName;
+					c2->Value = itemNumb;
 
-				dgvPlayerInv->Rows->Add(r);
+					r->Cells->Add(c1);
+					r->Cells->Add(c2);
+
+					dgvPlayerInv->Rows->Add(r);
+				}
 			}
 		 }
 
@@ -673,7 +677,8 @@ private: System::Void UpdateBuySellCB()
 				{
 					String^ item = gcnew String(i.getName().c_str());
 					cbBuyItem->Items->Add(item);
-					cbSellItem->Items->Add(item);
+					if(game->getPlayer().getNumberOf(i)>0)
+						cbSellItem->Items->Add(item);
 				}
 			}
 		 }

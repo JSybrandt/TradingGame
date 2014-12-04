@@ -12,6 +12,8 @@ Town::Town(std::string name, vector<Item > itemReference)
 		prices[i] = i.getDefaultCost();
 	}
 
+	markup = (((rand()%25)/100.0)+1);
+
 }
 
 Town::~Town()
@@ -44,7 +46,7 @@ void Town::updatePrice(Item i)
 
 int Town::getBuyPrice(Item i)
 {
-	return prices[i]*(((rand()%25)/100.0)+1);
+	return prices[i]*markup;
 }
 
 int Town::getSellPrice(Item i)
