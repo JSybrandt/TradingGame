@@ -381,6 +381,7 @@ namespace ClientWindow {
 			this->TownSellCol->HeaderText = L"Sell Price";
 			this->TownSellCol->Name = L"TownSellCol";
 			// 
+
 			// label8
 			// 
 			this->label8->AutoSize = true;
@@ -511,10 +512,17 @@ namespace ClientWindow {
 private: System::Void buttLoad_Click(System::Object^  sender, System::EventArgs^  e) {
 			
 		 }
+
 private: System::Void buttTravel_Click(System::Object^  sender, System::EventArgs^  e) {
 
 			 //TODO: actually travel
 			UpdateAll();
+
+			string event = game->getRandomEvent();
+			String ^EventName = gcnew String(event.c_str());
+
+
+			MessageBox::Show( "Event happened!!  " + EventName );
 
 		 }
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {

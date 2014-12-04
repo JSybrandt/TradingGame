@@ -1,5 +1,8 @@
 #include "Game.h"
-
+#include "Town.h"
+#include "Player.h"
+#include "Inventory.h"
+using std::string;
 
 
 
@@ -39,11 +42,15 @@ Game::Game()
 		townNames.push_back("Everwinter");
 		townNames.push_back("Dragontail");
 
+		eventNames.push_back("War");
+		eventNames.push_back("Famine");
+		eventNames.push_back("Birds attack");
+		eventNames.push_back("Rade");
 
 		for(int i = 0 ; i < NUMBER_OF_TOWNS; i++)
 		{
 			towns.push_back(Town(townNames[i],items));
-
+			
 			for(int j = 0 ; j < NUMBER_OF_STARTING_ITEMS;j++)
 				giveTownRandomItems(towns[i]);	
 		}
@@ -58,6 +65,40 @@ void Game::giveTownRandomItems(Town& t)
 {
 	t.getInventory().increaseNumberOf(items[rand()%items.size()],rand()%MAX_STARTING_QUANTITY);
 }
+
+string Game::getRandomEvent(){
+	int event;
+	event = rand()%eventNames.size();
+	string ev = eventNames[event];
+	EventEffect(ev);
+	return ev;
+}
+
+void Game::EventEffect(string s){
+	string event = s;
+	Town *t;
+	if(event == "War" ){
+		t->canTravelTo = false;
+	}
+	else if(event == "Famine"){
+		getCurrentLocation();
+		player.getInventory().decreaseNumberOf(Item("grocery",0), 100);
+	}
+	else if(event == "Rade"){
+		getCurrentLocation();
+		player.getInventory().decreaseNumberOf(Item("Sword",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Armor",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Tools",0), 100);
+	}
+	else if(event == "Birds Attack"){
+		getCurrentLocation();
+		player.getInventory().decreaseNumberOf(Item("Pearls",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Silk",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Perfume",0), 100);
+
+	}
+}
+
 
 //runs garbage and moves items around
 void Game::simulateWorld()

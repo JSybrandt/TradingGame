@@ -5,6 +5,9 @@
 #include"Inventory.h"
 using System::String;
 
+#include <string>
+using std::string;
+
 #include <map>
 using std::map;
 
@@ -22,7 +25,9 @@ private:
 
 	vector<Town>towns;
 	vector<Item>items;
+	vector<string> eventNames;
 	Player player;
+
 
 	int currentLocation;
 
@@ -33,6 +38,9 @@ public:
 	Game();
 
 	void giveTownRandomItems(Town& t);
+
+	string getRandomEvent();
+	void EventEffect(string s);
 
 	//runs garbage and moves items around
 	void simulateWorld();
