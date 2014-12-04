@@ -9,6 +9,8 @@ using std::string;
 Game::Game()
 	{
 		
+		dayCount = 0;
+
 		items.push_back(Item("Sword",200));
 		items.push_back(Item("Armor",175));
 		items.push_back(Item("Tools",45));
@@ -53,11 +55,15 @@ Game::Game()
 				giveTownRandomItems(towns[i]);	
 		}
 
+		currentLocation = rand()%NUMBER_OF_TOWNS;
+
+		player.setGold(STARTING_GOLD);
+
 	}
 
 void Game::giveTownRandomItems(Town& t)
 {
-	t.inventory.increaseNumberOf(items[rand()%items.size()],rand()%MAX_STARTING_QUANTITY);
+	t.getInventory().increaseNumberOf(items[rand()%items.size()],rand()%MAX_STARTING_QUANTITY);
 }
 
 string Game::getRandomEvent(){
@@ -76,19 +82,19 @@ void Game::EventEffect(string s){
 	}
 	else if(event == "Famine"){
 		getCurrentLocation();
-		player.getInventory()->decreaseNumberOf(Item("grocery",0), 100);
+		player.getInventory().decreaseNumberOf(Item("grocery",0), 100);
 	}
 	else if(event == "Rade"){
 		getCurrentLocation();
-		player.getInventory()->decreaseNumberOf(Item("Sword",0), 100);
-		player.getInventory()->decreaseNumberOf(Item("Armor",0), 100);
-		player.getInventory()->decreaseNumberOf(Item("Tools",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Sword",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Armor",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Tools",0), 100);
 	}
 	else if(event == "Birds Attack"){
 		getCurrentLocation();
-		player.getInventory()->decreaseNumberOf(Item("Pearls",0), 100);
-		player.getInventory()->decreaseNumberOf(Item("Silk",0), 100);
-		player.getInventory()->decreaseNumberOf(Item("Perfume",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Pearls",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Silk",0), 100);
+		player.getInventory().decreaseNumberOf(Item("Perfume",0), 100);
 
 	}
 }
@@ -105,7 +111,7 @@ void Game::simulateWorld()
 		//it will go through if its a good deal, it will maybe go through if it's a bad deal
 		if(t1->getBuyPrice(item)<t2->getSellPrice(item) || (rand()%100 > 80))
 		{
-			int ammount = rand()%(t1->inventory.getNumberOf(item));
+			int ammount = rand()%(t1->getInventory().getNumberOf(item));
 			t1->buy(item,ammount);
 			t2->sell(item,ammount);
 		}
@@ -122,5 +128,28 @@ void Game::setCurrentLocation(int loc)
 	if(loc > 0 && loc < towns.size()&&towns[loc].canTravelTo)
 	{
 		currentLocation = loc;
+		dayCount++;
+	}
+}
+
+void Game::attemptToBuy(Item i, int ammount)
+{
+	int cost = getCurrentLocation().getBuyPrice(i)*ammount;
+	if(getPlayer().getGold()>=cost)
+	{
+		getCurrentLocation().buy(i,ammount);
+		getPlayer().incrementGold(-cost);
+		getPlayer().getInventory().increaseNumberOf(i,ammount);
+	}
+}
+
+void Game::attemptToSell(Item i, int ammount)
+{
+	if(player.getInventory().getNumberOf(i) >= ammount)
+	{
+		int cost = getCurrentLocation().getSellPrice(i)*ammount;
+		getCurrentLocation().sell(i,ammount);
+		getPlayer().incrementGold(cost);
+		getPlayer().getInventory().decreaseNumberOf(i,ammount);
 	}
 }

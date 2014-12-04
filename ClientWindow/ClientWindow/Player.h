@@ -26,7 +26,8 @@ public:
 	Player(){};
 	Player(std::string,vector<Item> itemReference);
 
-	Inventory* getInventory(){return &inv;}
-
-	
+	Inventory& getInventory(){return inv;}
+	int getGold(){return gold;}
+	void setGold(int n){if(n>0)gold = n;}
+	void incrementGold(int n){if(n>=(-gold))gold += n;}
 };

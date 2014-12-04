@@ -7,7 +7,7 @@ Town::Town(std::string name, vector<Item > itemReference):inventory(itemReferenc
 
 	for(Item i : itemReference)
 	{
-		transactionLog[i] = std::pair<int,int> (0,0);
+		transactionLog[i] = TransactionTuple(0,0);
 		prices[i] = i.getDefaultCost();
 	}
 
@@ -22,15 +22,15 @@ void Town::refreshPrices()
 	for(Item i : itemReference)
 	{
 		updatePrice(i);
-		transactionLog[i]=std::pair<int,int> (0,0);
+		transactionLog[i]=TransactionTuple(0,0);
 	}
 }
 
 void Town::updatePrice(Item i)
 {
 	//Todo: determine exactly how we want to do this
-	float numBought = transactionLog[i].first;
-	float numSold = transactionLog[i].second;
+	float numBought = transactionLog[i].numBought;
+	float numSold = transactionLog[i].numSold;
 	float numTransactions = numBought+numSold;
 	if(numTransactions>0)
 	{
@@ -56,7 +56,7 @@ int Town::buy(Item i, int requestedAmmount)
 	{
 		inventory.decreaseNumberOf(i,requestedAmmount);
 		//record transaction, number of bought items
-		transactionLog[i].first+=requestedAmmount;
+		transactionLog[i].numBought+=requestedAmmount;
 		return prices[i]*requestedAmmount;
 	}
 	else
@@ -69,7 +69,7 @@ int Town::sell(Item i, int requestedAmmount)
 {
 	inventory.increaseNumberOf(i,requestedAmmount);
 	//record transaction, number of sold items
-	transactionLog[i].second+=requestedAmmount;
+	transactionLog[i].numSold+=requestedAmmount;
 	return prices[i]*requestedAmmount;
 }
 

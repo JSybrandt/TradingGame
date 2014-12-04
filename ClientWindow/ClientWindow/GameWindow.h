@@ -64,13 +64,13 @@ namespace ClientWindow {
 	private: System::Windows::Forms::Label^  label6;
 
 	private: System::Windows::Forms::Label^  lbGold;
-	private: System::Windows::Forms::Label^  lbPlayerName;
+
 	private: System::Windows::Forms::Label^  label5;
 	private: System::Windows::Forms::Label^  label4;
 	private: System::Windows::Forms::ComboBox^  cbLocationSelection;
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::Label^  label1;
+
 	private: System::Windows::Forms::DataGridView^  dgvPlayerInv;
 	private: System::Windows::Forms::DataGridView^  dgvTownInfo;
 
@@ -83,6 +83,9 @@ namespace ClientWindow {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  TownQuantityCol;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  TownBuyCol;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  TownSellCol;
+	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::Label^  lbDay;
+	private: System::Windows::Forms::Label^  lbCurrLoc;
 
 
 
@@ -128,13 +131,11 @@ namespace ClientWindow {
 			this->cbBuyItem = (gcnew System::Windows::Forms::ComboBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->lbGold = (gcnew System::Windows::Forms::Label());
-			this->lbPlayerName = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->cbLocationSelection = (gcnew System::Windows::Forms::ComboBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dgvPlayerInv = (gcnew System::Windows::Forms::DataGridView());
 			this->PlayerItemCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->PlayerQuantityCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -143,6 +144,9 @@ namespace ClientWindow {
 			this->TownQuantityCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->TownBuyCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->TownSellCol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->lbDay = (gcnew System::Windows::Forms::Label());
+			this->lbCurrLoc = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSellNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudBuyNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvPlayerInv))->BeginInit();
@@ -167,6 +171,7 @@ namespace ClientWindow {
 			this->buttSell->TabIndex = 17;
 			this->buttSell->Text = L"SELL";
 			this->buttSell->UseVisualStyleBackColor = true;
+			this->buttSell->Click += gcnew System::EventHandler(this, &GameWindow::buttSell_Click);
 			// 
 			// buttBuy
 			// 
@@ -229,20 +234,11 @@ namespace ClientWindow {
 			// lbGold
 			// 
 			this->lbGold->AutoSize = true;
-			this->lbGold->Location = System::Drawing::Point(220, 9);
+			this->lbGold->Location = System::Drawing::Point(79, 9);
 			this->lbGold->Name = L"lbGold";
 			this->lbGold->Size = System::Drawing::Size(43, 13);
 			this->lbGold->TabIndex = 9;
 			this->lbGold->Text = L"(lbGold)";
-			// 
-			// lbPlayerName
-			// 
-			this->lbPlayerName->AutoSize = true;
-			this->lbPlayerName->Location = System::Drawing::Point(57, 9);
-			this->lbPlayerName->Name = L"lbPlayerName";
-			this->lbPlayerName->Size = System::Drawing::Size(78, 13);
-			this->lbPlayerName->TabIndex = 8;
-			this->lbPlayerName->Text = L"(lbPlayerName)";
 			// 
 			// label5
 			// 
@@ -282,20 +278,11 @@ namespace ClientWindow {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(184, 9);
+			this->label2->Location = System::Drawing::Point(43, 9);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(32, 13);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Gold:";
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(12, 9);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(39, 13);
-			this->label1->TabIndex = 2;
-			this->label1->Text = L"Player:";
 			// 
 			// dgvPlayerInv
 			// 
@@ -365,11 +352,44 @@ namespace ClientWindow {
 			this->TownSellCol->HeaderText = L"Sell Price";
 			this->TownSellCol->Name = L"TownSellCol";
 			// 
+
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(162, 9);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(29, 13);
+			this->label8->TabIndex = 19;
+			this->label8->Text = L"Day:";
+			// 
+			// lbDay
+			// 
+			this->lbDay->AutoSize = true;
+			this->lbDay->Enabled = false;
+			this->lbDay->Location = System::Drawing::Point(197, 9);
+			this->lbDay->Name = L"lbDay";
+			this->lbDay->Size = System::Drawing::Size(40, 13);
+			this->lbDay->TabIndex = 20;
+			this->lbDay->Text = L"(lbDay)";
+			// 
+			// lbCurrLoc
+			// 
+			this->lbCurrLoc->AutoSize = true;
+			this->lbCurrLoc->Enabled = false;
+			this->lbCurrLoc->Location = System::Drawing::Point(397, 144);
+			this->lbCurrLoc->Name = L"lbCurrLoc";
+			this->lbCurrLoc->Size = System::Drawing::Size(58, 13);
+			this->lbCurrLoc->TabIndex = 21;
+			this->lbCurrLoc->Text = L"(lbCurrLoc)";
+			// 
 			// GameWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(755, 556);
+			this->Controls->Add(this->lbCurrLoc);
+			this->Controls->Add(this->lbDay);
+			this->Controls->Add(this->label8);
 			this->Controls->Add(this->buttBuy);
 			this->Controls->Add(this->dgvTownInfo);
 			this->Controls->Add(this->label3);
@@ -382,9 +402,7 @@ namespace ClientWindow {
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->nudSellNumb);
 			this->Controls->Add(this->cbSellItem);
-			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label7);
-			this->Controls->Add(this->lbPlayerName);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->lbGold);
 			this->Controls->Add(this->label4);
@@ -405,72 +423,16 @@ namespace ClientWindow {
 
 
 		private: 
-			Player* player;
 			Game* game;
-			Town* town;
 
 private: System::Void buttLoad_Click(System::Object^  sender, System::EventArgs^  e) {
 			
 		 }
 
-private: System::Void buttBuy_Click(System::Object^  sender, System::EventArgs^  e) {
-			
-}
 private: System::Void buttTravel_Click(System::Object^  sender, System::EventArgs^  e) {
-			/*int selectedIndex = cbLocationSelection->SelectedIndex;
-			switch (selectedIndex)
-			{
-			case 0: 
-				cbBuyItem->Items->Add("HI");
-				break;
-			case 1:
-				cbBuyItem->Items->Add("Hi");
-				break;
-			case 2:
-				cbBuyItem->Items->Add("Hi");
-				break;
-			case 3:
-				cbBuyItem->Items->Add("Hi");
-				break;
-			case 4:
-				cbBuyItem->Items->Add("Hi");
-				break;
-			case 5:
-				cbBuyItem->Items->Add("Hi");
-				break;
-			case 6:
-				cbBuyItem->Items->Add("Hi");
-				break;
-			case 7:
-				cbBuyItem->Items->Add("Hi");
-				break;
-			case 8:
-				cbBuyItem->Items->Add("Hi");
-				break;
-			case 9:
-				cbBuyItem->Items->Add("Hi");
-				break;
 
-			}
-*/
-			cbBuyItem->Items->Add("Sword");
-			cbBuyItem->Items->Add("Armor");
-			cbBuyItem->Items->Add("Tools");
-			cbBuyItem->Items->Add("Iron");
-			cbBuyItem->Items->Add("Leather");
-			cbBuyItem->Items->Add("Common-Spices");
-			cbBuyItem->Items->Add("Salt");
-			cbBuyItem->Items->Add("Groceries");
-			cbBuyItem->Items->Add("Wine");
-			cbBuyItem->Items->Add("Rare-Spices");
-			cbBuyItem->Items->Add("Paper");
-			cbBuyItem->Items->Add("Oil");
-			cbBuyItem->Items->Add("Wax");
-			cbBuyItem->Items->Add("Perfume");
-			cbBuyItem->Items->Add("Silk");
-			cbBuyItem->Items->Add("Pearls");
-
-			Controls->Add(cbBuyItem);
+			 //TODO: actually travel
+			UpdateAll();
 
 			string event = game->getRandomEvent();
 			String ^EventName = gcnew String(event.c_str());
@@ -480,9 +442,9 @@ private: System::Void buttTravel_Click(System::Object^  sender, System::EventArg
 
 		 }
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
-			player = new Player();
 			game = new Game();
-			UpdatePlayerDGV();
+			
+			UpdateAll();
 
 			cbLocationSelection->Items->Add("Newsham");
 			cbLocationSelection->Items->Add("Wolfwater");
@@ -511,7 +473,7 @@ private: System::Void UpdatePlayerDGV()
 				DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
 
 				String^ itemName = gcnew String(i.getName().c_str());
-				String^ itemNumb = Convert::ToString(player->getInventory()->getNumberOf(i));
+				String^ itemNumb = Convert::ToString(game->getPlayer().getInventory().getNumberOf(i));
 
 				c1->Value = itemName;
 				c2->Value = itemNumb;
@@ -523,5 +485,116 @@ private: System::Void UpdatePlayerDGV()
 			}
 		 }
 
+private: System::Void UpdateTownDGV()
+		 {
+			dgvTownInfo->Rows->Clear();
+			for(Item i : *game->getItemReference())
+			{
+				if(game->getCurrentLocation().getInventory().getNumberOf(i) > 0)
+				{
+					DataGridViewRow^ r = gcnew DataGridViewRow;
+					DataGridViewCell^ c1 = gcnew DataGridViewTextBoxCell;
+					DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
+					DataGridViewCell^ c3 = gcnew DataGridViewTextBoxCell;
+					DataGridViewCell^ c4 = gcnew DataGridViewTextBoxCell;
+
+					String^ itemName = gcnew String(i.getName().c_str());
+					String^ itemNumb = Convert::ToString(game->getCurrentLocation().getInventory().getNumberOf(i));
+					String^ buyPrice = Convert::ToString(game->getCurrentLocation().getBuyPrice(i));
+					String^ sellPrice = Convert::ToString(game->getCurrentLocation().getSellPrice(i));
+
+					c1->Value = itemName;
+					c2->Value = itemNumb;
+					c3->Value = buyPrice;
+					c4->Value = sellPrice;
+
+					r->Cells->Add(c1);
+					r->Cells->Add(c2);
+					r->Cells->Add(c3);
+					r->Cells->Add(c4);
+
+					dgvTownInfo->Rows->Add(r);
+				}
+			}
+		 }
+
+private: System::Void UpdateBuySellCB()
+		 {
+			cbBuyItem->Items->Clear();
+			cbSellItem->Items->Clear();
+
+			for(Item i : *game->getItemReference())
+			{
+				if(game->getCurrentLocation().getInventory().getNumberOf(i) > 0)
+				{
+					String^ item = gcnew String(i.getName().c_str());
+					cbBuyItem->Items->Add(item);
+					cbSellItem->Items->Add(item);
+				}
+			}
+		 }
+
+private: System::Void UpdateLabels()
+		 {
+			lbDay->Text =  Convert::ToString(game->getDayCount());
+			lbCurrLoc->Text = gcnew String(game->getCurrentLocation().getName().c_str());
+			lbGold->Text = Convert::ToString(game->getPlayer().getGold());
+		 }
+
+private: System::Void UpdateAll()
+		 {
+			UpdateLabels();
+			UpdateBuySellCB();
+			UpdatePlayerDGV();
+			UpdateTownDGV();
+		 }
+
+private: Item getItemFromBuyComboBox()
+		 {
+			String ^ selected = cbBuyItem->Text;
+			for(Item i : *game->getItemReference())
+			{
+				String ^ currItem = gcnew String(i.getName().c_str());
+				if(selected->Equals(currItem))
+					return i;
+			}
+			return Item("NULL",0);
+		 }
+private: Item getItemFromSellComboBox()
+		 {
+			String ^ selected = cbSellItem->Text;
+			for(Item i : *game->getItemReference())
+			{
+				String ^ currItem = gcnew String(i.getName().c_str());
+				if(selected->Equals(currItem))
+					return i;
+			}
+			return Item("NULL",0);
+		 }
+private: System::Void buttBuy_Click(System::Object^  sender, System::EventArgs^  e) {
+
+			 Item i = getItemFromBuyComboBox();
+
+			 int amt = Convert::ToInt32(nudBuyNumb->Value);
+
+			 if(i.getName()!="NULL")
+			 {
+				 game->attemptToBuy(i,amt);
+			 }
+
+			 UpdateAll();
+		 }
+private: System::Void buttSell_Click(System::Object^  sender, System::EventArgs^  e) {
+			 Item i = getItemFromSellComboBox();
+
+			 int amt = Convert::ToInt32(nudSellNumb->Value);
+
+			  if(i.getName()!="NULL")
+			 {
+				 game->attemptToSell(i,amt);
+			 }
+
+			 UpdateAll();
+		 }
 };
 }
