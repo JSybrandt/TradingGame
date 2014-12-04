@@ -156,7 +156,8 @@ void Game::attemptToBuy(Item i, int ammount)
 		h.item = i;
 		h.numBought = ammount;
 		h.numSold = 0;
-		h.price = cost;
+		h.price = cost/ammount;
+		h.gold = getPlayer().getGold();
 
 		std::vector<HistoryTuple>::iterator it;
 		it = getPlayer().getHistory().begin();
@@ -179,7 +180,8 @@ void Game::attemptToSell(Item i, int ammount)
 		h.item = i;
 		h.numBought = 0;
 		h.numSold = ammount;
-		h.price = cost;
+		h.price = cost/ammount;
+		h.gold = getPlayer().getGold();
 
 		std::vector<HistoryTuple>::iterator it;
 		it = getPlayer().getHistory().begin();

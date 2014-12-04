@@ -101,6 +101,11 @@ namespace ClientWindow {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histPrice;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histBuyPrice;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histSellPrice;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histGold;
+
+
+
+
 
 
 
@@ -179,6 +184,7 @@ namespace ClientWindow {
 			this->histPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->histBuyPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->histSellPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->histGold = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSellNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudBuyNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvPlayerInv))->BeginInit();
@@ -188,7 +194,7 @@ namespace ClientWindow {
 			// 
 			// buttTravel
 			// 
-			this->buttTravel->Location = System::Drawing::Point(497, 33);
+			this->buttTravel->Location = System::Drawing::Point(493, 41);
 			this->buttTravel->Name = L"buttTravel";
 			this->buttTravel->Size = System::Drawing::Size(248, 23);
 			this->buttTravel->TabIndex = 18;
@@ -285,7 +291,7 @@ namespace ClientWindow {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(492, 9);
+			this->label4->Location = System::Drawing::Point(490, 17);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(40, 13);
 			this->label4->TabIndex = 6;
@@ -294,7 +300,7 @@ namespace ClientWindow {
 			// cbLocationSelection
 			// 
 			this->cbLocationSelection->FormattingEnabled = true;
-			this->cbLocationSelection->Location = System::Drawing::Point(538, 6);
+			this->cbLocationSelection->Location = System::Drawing::Point(538, 14);
 			this->cbLocationSelection->Name = L"cbLocationSelection";
 			this->cbLocationSelection->Size = System::Drawing::Size(203, 21);
 			this->cbLocationSelection->TabIndex = 5;
@@ -385,7 +391,6 @@ namespace ClientWindow {
 			this->TownSellCol->HeaderText = L"Sell Price";
 			this->TownSellCol->Name = L"TownSellCol";
 			// 
-
 			// label8
 			// 
 			this->label8->AutoSize = true;
@@ -422,8 +427,8 @@ namespace ClientWindow {
 			this->history->AllowUserToResizeColumns = false;
 			this->history->AllowUserToResizeRows = false;
 			this->history->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->history->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {this->histItem, this->histPrice, 
-				this->histBuyPrice, this->histSellPrice});
+			this->history->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {this->histItem, this->histPrice, 
+				this->histBuyPrice, this->histSellPrice, this->histGold});
 			this->history->Location = System::Drawing::Point(751, 160);
 			this->history->Name = L"history";
 			this->history->RowHeadersVisible = false;
@@ -431,7 +436,7 @@ namespace ClientWindow {
 			this->history->ShowCellToolTips = false;
 			this->history->ShowEditingIcon = false;
 			this->history->ShowRowErrors = false;
-			this->history->Size = System::Drawing::Size(436, 392);
+			this->history->Size = System::Drawing::Size(474, 392);
 			this->history->TabIndex = 22;
 			// 
 			// historyLabel
@@ -460,18 +465,26 @@ namespace ClientWindow {
 			this->histBuyPrice->HeaderText = L"Bought";
 			this->histBuyPrice->Name = L"histBuyPrice";
 			this->histBuyPrice->ReadOnly = true;
+			this->histBuyPrice->Width = 75;
 			// 
 			// histSellPrice
 			// 
 			this->histSellPrice->HeaderText = L"Sold";
 			this->histSellPrice->Name = L"histSellPrice";
 			this->histSellPrice->ReadOnly = true;
+			this->histSellPrice->Width = 75;
+			// 
+			// histGold
+			// 
+			this->histGold->HeaderText = L"Gold Remaining";
+			this->histGold->Name = L"histGold";
+			this->histGold->Width = 120;
 			// 
 			// GameWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1199, 556);
+			this->ClientSize = System::Drawing::Size(1234, 556);
 			this->Controls->Add(this->historyLabel);
 			this->Controls->Add(this->history);
 			this->Controls->Add(this->lbCurrLoc);
@@ -625,6 +638,7 @@ private: System::Void UpdateHistoryDGV()
 				 DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
 				 DataGridViewCell^ c3 = gcnew DataGridViewTextBoxCell;
 				 DataGridViewCell^ c4 = gcnew DataGridViewTextBoxCell;
+				 DataGridViewCell^ c5 = gcnew DataGridViewTextBoxCell;
 
 				 Item i = h.item;
 
@@ -632,16 +646,19 @@ private: System::Void UpdateHistoryDGV()
 				 String^ iQuantity = Convert::ToString(h.price);
 				 String^ iBought = Convert::ToString(h.numBought);
 				 String^ iSold = Convert::ToString(h.numSold);
+				 String^ pGold = Convert::ToString(h.gold);
 
 				 c1->Value = itemName;
 				 c2->Value = iQuantity;
 				 c3->Value = iBought;
 				 c4->Value = iSold;
+				 c5->Value = pGold;
 
 				 r->Cells->Add(c1);
 				 r->Cells->Add(c2);
 				 r->Cells->Add(c3);
 				 r->Cells->Add(c4);
+				 r->Cells->Add(c5);
 
 				 history->Rows->Add(r);
 			 }

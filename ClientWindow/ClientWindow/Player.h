@@ -12,6 +12,7 @@ struct HistoryTuple
 		int numBought;
 		int numSold;
 		int price;
+		int gold;
 };
 
 class Player
