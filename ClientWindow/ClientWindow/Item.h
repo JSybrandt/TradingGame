@@ -9,6 +9,11 @@ private:
 	std::string name;
 	int defaultCost;
 public:
+	Item()
+	{
+		name = "Default Constructed";
+		defaultCost = 0;
+	}
 	Item(std::string n, int c)
 	{
 		name = n;

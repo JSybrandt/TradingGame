@@ -7,6 +7,7 @@ using std::vector;
 
 struct HistoryTuple
 {
+		HistoryTuple() {}
 		Item item;
 		int numBought;
 		int numSold;
@@ -27,6 +28,7 @@ public:
 	Player(std::string,vector<Item> itemReference);
 
 	Inventory& getInventory(){return inv;}
+	vector<HistoryTuple>& getHistory(){return history;}
 	int getGold(){return gold;}
 	void setGold(int n){if(n>0)gold = n;}
 	void incrementGold(int n){if(n>=(-gold))gold += n;}
