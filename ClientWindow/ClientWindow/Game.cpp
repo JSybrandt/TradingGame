@@ -76,29 +76,26 @@ string Game::getRandomEvent(){
 
 void Game::EventEffect(string s){
 	string event = s;
-	Town town = getCurrentLocation();
+	getCurrentLocation();
 	if(event == "War" ){
 		getCurrentLocation().canTravelTo = false;
 	}
 	else if(event == "Famine"){
-		getCurrentLocation();
-		town.decreaseNumberOf(items[7], 100);
+		getCurrentLocation().decreaseNumberOf(items[7], 100);
 
 	}
 	else if(event == "Rade"){
-		getCurrentLocation();
-		town.decreaseNumberOf(items[0], 100);
-		town.decreaseNumberOf(items[1], 100);
-		town.decreaseNumberOf(items[2], 100);
+		getCurrentLocation().decreaseNumberOf(items[0], 100);
+		getCurrentLocation().decreaseNumberOf(items[1], 100);
+		getCurrentLocation().decreaseNumberOf(items[2], 100);
 
 
 	}
 	else if(event == "Birds attack"){
-		getCurrentLocation();
 
-		town.decreaseNumberOf(items[15], 100);
-		town.decreaseNumberOf(items[14], 100);
-		town.decreaseNumberOf(items[13], 100);
+		getCurrentLocation().decreaseNumberOf(items[15], 100);
+		getCurrentLocation().decreaseNumberOf(items[14], 100);
+		getCurrentLocation().decreaseNumberOf(items[13], 100);
 
 
 	}
