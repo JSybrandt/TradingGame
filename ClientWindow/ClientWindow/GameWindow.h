@@ -541,18 +541,17 @@ private: System::Void buttTravel_Click(System::Object^  sender, System::EventArg
 
 				game->setCurrentLocation(id);
  
-
 				string event = game->getRandomEvent();
 				String ^EventName = gcnew String(event.c_str());
 
-				MessageBox::Show( "Event happened!!  " + EventName );
-
 				UpdateAll();
 
-				if(game->getDayCount() == 30) {
+				if(game->getDayCount() == 3) {
 					MessageBox::Show("Game over! Your gold after 30 days was: " + (game->getPlayer().getGold()));
 					Application::Exit();
 				}
+
+				MessageBox::Show( "Event happened!!  " + EventName );
 
 			 }catch(...){//do nothing
 			 }
