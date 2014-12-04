@@ -179,13 +179,13 @@ namespace ClientWindow {
 			this->lbDay = (gcnew System::Windows::Forms::Label());
 			this->lbCurrLoc = (gcnew System::Windows::Forms::Label());
 			this->history = (gcnew System::Windows::Forms::DataGridView());
-			this->colorDialog1 = (gcnew System::Windows::Forms::ColorDialog());
-			this->historyLabel = (gcnew System::Windows::Forms::Label());
 			this->histItem = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->histPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->histBuyPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->histSellPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->histGold = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colorDialog1 = (gcnew System::Windows::Forms::ColorDialog());
+			this->historyLabel = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSellNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudBuyNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvPlayerInv))->BeginInit();
@@ -195,7 +195,7 @@ namespace ClientWindow {
 			// 
 			// buttTravel
 			// 
-			this->buttTravel->Location = System::Drawing::Point(493, 41);
+			this->buttTravel->Location = System::Drawing::Point(854, 65);
 			this->buttTravel->Name = L"buttTravel";
 			this->buttTravel->Size = System::Drawing::Size(248, 23);
 			this->buttTravel->TabIndex = 18;
@@ -205,7 +205,7 @@ namespace ClientWindow {
 			// 
 			// buttSell
 			// 
-			this->buttSell->Location = System::Drawing::Point(493, 97);
+			this->buttSell->Location = System::Drawing::Point(269, 65);
 			this->buttSell->Name = L"buttSell";
 			this->buttSell->Size = System::Drawing::Size(248, 23);
 			this->buttSell->TabIndex = 17;
@@ -215,7 +215,7 @@ namespace ClientWindow {
 			// 
 			// buttBuy
 			// 
-			this->buttBuy->Location = System::Drawing::Point(15, 97);
+			this->buttBuy->Location = System::Drawing::Point(15, 65);
 			this->buttBuy->Name = L"buttBuy";
 			this->buttBuy->Size = System::Drawing::Size(248, 23);
 			this->buttBuy->TabIndex = 4;
@@ -225,7 +225,7 @@ namespace ClientWindow {
 			// 
 			// nudSellNumb
 			// 
-			this->nudSellNumb->Location = System::Drawing::Point(665, 71);
+			this->nudSellNumb->Location = System::Drawing::Point(441, 39);
 			this->nudSellNumb->Name = L"nudSellNumb";
 			this->nudSellNumb->Size = System::Drawing::Size(76, 20);
 			this->nudSellNumb->TabIndex = 16;
@@ -233,7 +233,7 @@ namespace ClientWindow {
 			// cbSellItem
 			// 
 			this->cbSellItem->FormattingEnabled = true;
-			this->cbSellItem->Location = System::Drawing::Point(538, 70);
+			this->cbSellItem->Location = System::Drawing::Point(314, 38);
 			this->cbSellItem->Name = L"cbSellItem";
 			this->cbSellItem->Size = System::Drawing::Size(121, 21);
 			this->cbSellItem->TabIndex = 15;
@@ -241,7 +241,7 @@ namespace ClientWindow {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(505, 73);
+			this->label7->Location = System::Drawing::Point(281, 41);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(27, 13);
 			this->label7->TabIndex = 14;
@@ -249,7 +249,7 @@ namespace ClientWindow {
 			// 
 			// nudBuyNumb
 			// 
-			this->nudBuyNumb->Location = System::Drawing::Point(187, 71);
+			this->nudBuyNumb->Location = System::Drawing::Point(187, 39);
 			this->nudBuyNumb->Name = L"nudBuyNumb";
 			this->nudBuyNumb->Size = System::Drawing::Size(76, 20);
 			this->nudBuyNumb->TabIndex = 13;
@@ -257,7 +257,7 @@ namespace ClientWindow {
 			// cbBuyItem
 			// 
 			this->cbBuyItem->FormattingEnabled = true;
-			this->cbBuyItem->Location = System::Drawing::Point(60, 70);
+			this->cbBuyItem->Location = System::Drawing::Point(60, 38);
 			this->cbBuyItem->Name = L"cbBuyItem";
 			this->cbBuyItem->Size = System::Drawing::Size(121, 21);
 			this->cbBuyItem->TabIndex = 12;
@@ -265,7 +265,7 @@ namespace ClientWindow {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(12, 73);
+			this->label6->Location = System::Drawing::Point(12, 41);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(28, 13);
 			this->label6->TabIndex = 11;
@@ -274,7 +274,7 @@ namespace ClientWindow {
 			// lbGold
 			// 
 			this->lbGold->AutoSize = true;
-			this->lbGold->Location = System::Drawing::Point(79, 9);
+			this->lbGold->Location = System::Drawing::Point(48, 9);
 			this->lbGold->Name = L"lbGold";
 			this->lbGold->Size = System::Drawing::Size(43, 13);
 			this->lbGold->TabIndex = 9;
@@ -283,7 +283,7 @@ namespace ClientWindow {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(12, 144);
+			this->label5->Location = System::Drawing::Point(12, 103);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(86, 13);
 			this->label5->TabIndex = 7;
@@ -292,7 +292,7 @@ namespace ClientWindow {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(490, 17);
+			this->label4->Location = System::Drawing::Point(851, 41);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(40, 13);
 			this->label4->TabIndex = 6;
@@ -301,7 +301,7 @@ namespace ClientWindow {
 			// cbLocationSelection
 			// 
 			this->cbLocationSelection->FormattingEnabled = true;
-			this->cbLocationSelection->Location = System::Drawing::Point(538, 14);
+			this->cbLocationSelection->Location = System::Drawing::Point(899, 38);
 			this->cbLocationSelection->Name = L"cbLocationSelection";
 			this->cbLocationSelection->Size = System::Drawing::Size(203, 21);
 			this->cbLocationSelection->TabIndex = 5;
@@ -309,7 +309,7 @@ namespace ClientWindow {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(303, 144);
+			this->label3->Location = System::Drawing::Point(220, 103);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(88, 13);
 			this->label3->TabIndex = 4;
@@ -318,7 +318,7 @@ namespace ClientWindow {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(43, 9);
+			this->label2->Location = System::Drawing::Point(12, 9);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(32, 13);
 			this->label2->TabIndex = 3;
@@ -333,25 +333,28 @@ namespace ClientWindow {
 			this->dgvPlayerInv->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvPlayerInv->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {this->PlayerItemCol, 
 				this->PlayerQuantityCol});
-			this->dgvPlayerInv->Location = System::Drawing::Point(12, 160);
+			this->dgvPlayerInv->Location = System::Drawing::Point(12, 128);
 			this->dgvPlayerInv->Name = L"dgvPlayerInv";
+			this->dgvPlayerInv->ReadOnly = true;
 			this->dgvPlayerInv->RowHeadersVisible = false;
 			this->dgvPlayerInv->ShowCellErrors = false;
 			this->dgvPlayerInv->ShowCellToolTips = false;
 			this->dgvPlayerInv->ShowEditingIcon = false;
 			this->dgvPlayerInv->ShowRowErrors = false;
-			this->dgvPlayerInv->Size = System::Drawing::Size(288, 392);
+			this->dgvPlayerInv->Size = System::Drawing::Size(205, 392);
 			this->dgvPlayerInv->TabIndex = 0;
 			// 
 			// PlayerItemCol
 			// 
 			this->PlayerItemCol->HeaderText = L"Item";
 			this->PlayerItemCol->Name = L"PlayerItemCol";
+			this->PlayerItemCol->ReadOnly = true;
 			// 
 			// PlayerQuantityCol
 			// 
 			this->PlayerQuantityCol->HeaderText = L"Quantity";
 			this->PlayerQuantityCol->Name = L"PlayerQuantityCol";
+			this->PlayerQuantityCol->ReadOnly = true;
 			// 
 			// dgvTownInfo
 			// 
@@ -362,40 +365,45 @@ namespace ClientWindow {
 			this->dgvTownInfo->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvTownInfo->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {this->TownItemCol, 
 				this->TownQuantityCol, this->TownBuyCol, this->TownSellCol});
-			this->dgvTownInfo->Location = System::Drawing::Point(306, 160);
+			this->dgvTownInfo->Location = System::Drawing::Point(223, 128);
 			this->dgvTownInfo->Name = L"dgvTownInfo";
+			this->dgvTownInfo->ReadOnly = true;
 			this->dgvTownInfo->RowHeadersVisible = false;
 			this->dgvTownInfo->ShowCellErrors = false;
 			this->dgvTownInfo->ShowCellToolTips = false;
 			this->dgvTownInfo->ShowEditingIcon = false;
 			this->dgvTownInfo->ShowRowErrors = false;
-			this->dgvTownInfo->Size = System::Drawing::Size(439, 392);
+			this->dgvTownInfo->Size = System::Drawing::Size(404, 392);
 			this->dgvTownInfo->TabIndex = 1;
 			// 
 			// TownItemCol
 			// 
 			this->TownItemCol->HeaderText = L"Item";
 			this->TownItemCol->Name = L"TownItemCol";
+			this->TownItemCol->ReadOnly = true;
 			// 
 			// TownQuantityCol
 			// 
 			this->TownQuantityCol->HeaderText = L"Quantity";
 			this->TownQuantityCol->Name = L"TownQuantityCol";
+			this->TownQuantityCol->ReadOnly = true;
 			// 
 			// TownBuyCol
 			// 
 			this->TownBuyCol->HeaderText = L"Buy Price";
 			this->TownBuyCol->Name = L"TownBuyCol";
+			this->TownBuyCol->ReadOnly = true;
 			// 
 			// TownSellCol
 			// 
 			this->TownSellCol->HeaderText = L"Sell Price";
 			this->TownSellCol->Name = L"TownSellCol";
+			this->TownSellCol->ReadOnly = true;
 			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(162, 9);
+			this->label8->Location = System::Drawing::Point(131, 9);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(29, 13);
 			this->label8->TabIndex = 19;
@@ -405,7 +413,7 @@ namespace ClientWindow {
 			// 
 			this->lbDay->AutoSize = true;
 			this->lbDay->Enabled = false;
-			this->lbDay->Location = System::Drawing::Point(197, 9);
+			this->lbDay->Location = System::Drawing::Point(166, 9);
 			this->lbDay->Name = L"lbDay";
 			this->lbDay->Size = System::Drawing::Size(40, 13);
 			this->lbDay->TabIndex = 20;
@@ -415,7 +423,7 @@ namespace ClientWindow {
 			// 
 			this->lbCurrLoc->AutoSize = true;
 			this->lbCurrLoc->Enabled = false;
-			this->lbCurrLoc->Location = System::Drawing::Point(397, 144);
+			this->lbCurrLoc->Location = System::Drawing::Point(314, 103);
 			this->lbCurrLoc->Name = L"lbCurrLoc";
 			this->lbCurrLoc->Size = System::Drawing::Size(58, 13);
 			this->lbCurrLoc->TabIndex = 21;
@@ -430,8 +438,9 @@ namespace ClientWindow {
 			this->history->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->history->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {this->histItem, this->histPrice, 
 				this->histBuyPrice, this->histSellPrice, this->histGold});
-			this->history->Location = System::Drawing::Point(751, 160);
+			this->history->Location = System::Drawing::Point(633, 128);
 			this->history->Name = L"history";
+			this->history->ReadOnly = true;
 			this->history->RowHeadersVisible = false;
 			this->history->ShowCellErrors = false;
 			this->history->ShowCellToolTips = false;
@@ -439,15 +448,6 @@ namespace ClientWindow {
 			this->history->ShowRowErrors = false;
 			this->history->Size = System::Drawing::Size(474, 392);
 			this->history->TabIndex = 22;
-			// 
-			// historyLabel
-			// 
-			this->historyLabel->AutoSize = true;
-			this->historyLabel->Location = System::Drawing::Point(751, 141);
-			this->historyLabel->Name = L"historyLabel";
-			this->historyLabel->Size = System::Drawing::Size(39, 13);
-			this->historyLabel->TabIndex = 23;
-			this->historyLabel->Text = L"History";
 			// 
 			// histItem
 			// 
@@ -479,13 +479,23 @@ namespace ClientWindow {
 			// 
 			this->histGold->HeaderText = L"Gold Remaining";
 			this->histGold->Name = L"histGold";
+			this->histGold->ReadOnly = true;
 			this->histGold->Width = 120;
+			// 
+			// historyLabel
+			// 
+			this->historyLabel->AutoSize = true;
+			this->historyLabel->Location = System::Drawing::Point(630, 103);
+			this->historyLabel->Name = L"historyLabel";
+			this->historyLabel->Size = System::Drawing::Size(39, 13);
+			this->historyLabel->TabIndex = 23;
+			this->historyLabel->Text = L"History";
 			// 
 			// GameWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1234, 556);
+			this->ClientSize = System::Drawing::Size(1114, 532);
 			this->Controls->Add(this->historyLabel);
 			this->Controls->Add(this->history);
 			this->Controls->Add(this->lbCurrLoc);

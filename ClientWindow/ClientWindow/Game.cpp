@@ -44,7 +44,7 @@ Game::Game()
 		eventNames.push_back("War");
 		eventNames.push_back("Famine");
 		eventNames.push_back("Birds attack");
-		eventNames.push_back("Rade");
+		eventNames.push_back("Raid");
 
 		for(int i = 0 ; i < NUMBER_OF_TOWNS; i++)
 		{
@@ -85,7 +85,7 @@ void Game::EventEffect(string s){
 		town.decreaseNumberOf(items[7], 100);
 
 	}
-	else if(event == "Rade"){
+	else if(event == "Raid"){
 		getCurrentLocation();
 		town.decreaseNumberOf(items[0], 100);
 		town.decreaseNumberOf(items[1], 100);
