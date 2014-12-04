@@ -90,6 +90,27 @@ namespace ClientWindow {
 	private: System::Windows::Forms::Label^  label8;
 	private: System::Windows::Forms::Label^  lbDay;
 	private: System::Windows::Forms::Label^  lbCurrLoc;
+	private: System::Windows::Forms::DataGridView^  history;
+	private: System::Windows::Forms::ColorDialog^  colorDialog1;
+
+
+
+
+	private: System::Windows::Forms::Label^  historyLabel;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histItem;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histPrice;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histBuyPrice;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histSellPrice;
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -151,10 +172,18 @@ namespace ClientWindow {
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->lbDay = (gcnew System::Windows::Forms::Label());
 			this->lbCurrLoc = (gcnew System::Windows::Forms::Label());
+			this->history = (gcnew System::Windows::Forms::DataGridView());
+			this->colorDialog1 = (gcnew System::Windows::Forms::ColorDialog());
+			this->historyLabel = (gcnew System::Windows::Forms::Label());
+			this->histItem = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->histPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->histBuyPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->histSellPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSellNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudBuyNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvPlayerInv))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvTownInfo))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->history))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// buttTravel
@@ -386,11 +415,65 @@ namespace ClientWindow {
 			this->lbCurrLoc->TabIndex = 21;
 			this->lbCurrLoc->Text = L"(lbCurrLoc)";
 			// 
+			// history
+			// 
+			this->history->AllowUserToAddRows = false;
+			this->history->AllowUserToDeleteRows = false;
+			this->history->AllowUserToResizeColumns = false;
+			this->history->AllowUserToResizeRows = false;
+			this->history->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->history->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {this->histItem, this->histPrice, 
+				this->histBuyPrice, this->histSellPrice});
+			this->history->Location = System::Drawing::Point(751, 160);
+			this->history->Name = L"history";
+			this->history->RowHeadersVisible = false;
+			this->history->ShowCellErrors = false;
+			this->history->ShowCellToolTips = false;
+			this->history->ShowEditingIcon = false;
+			this->history->ShowRowErrors = false;
+			this->history->Size = System::Drawing::Size(436, 392);
+			this->history->TabIndex = 22;
+			// 
+			// historyLabel
+			// 
+			this->historyLabel->AutoSize = true;
+			this->historyLabel->Location = System::Drawing::Point(751, 141);
+			this->historyLabel->Name = L"historyLabel";
+			this->historyLabel->Size = System::Drawing::Size(39, 13);
+			this->historyLabel->TabIndex = 23;
+			this->historyLabel->Text = L"History";
+			// 
+			// histItem
+			// 
+			this->histItem->HeaderText = L"Item";
+			this->histItem->Name = L"histItem";
+			this->histItem->ReadOnly = true;
+			// 
+			// histPrice
+			// 
+			this->histPrice->HeaderText = L"Price";
+			this->histPrice->Name = L"histPrice";
+			this->histPrice->ReadOnly = true;
+			// 
+			// histBuyPrice
+			// 
+			this->histBuyPrice->HeaderText = L"Bought";
+			this->histBuyPrice->Name = L"histBuyPrice";
+			this->histBuyPrice->ReadOnly = true;
+			// 
+			// histSellPrice
+			// 
+			this->histSellPrice->HeaderText = L"Sold";
+			this->histSellPrice->Name = L"histSellPrice";
+			this->histSellPrice->ReadOnly = true;
+			// 
 			// GameWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(755, 556);
+			this->ClientSize = System::Drawing::Size(1199, 556);
+			this->Controls->Add(this->historyLabel);
+			this->Controls->Add(this->history);
 			this->Controls->Add(this->lbCurrLoc);
 			this->Controls->Add(this->lbDay);
 			this->Controls->Add(this->label8);
@@ -418,6 +501,7 @@ namespace ClientWindow {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudBuyNumb))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvPlayerInv))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvTownInfo))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->history))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -530,6 +614,40 @@ private: System::Void UpdateTownDGV()
 			}
 		 }
 
+private: System::Void UpdateHistoryDGV()
+		 {
+			 history->Rows->Clear();
+			 for(HistoryTuple h : game->getPlayer().getHistory())
+			 {
+
+				 DataGridViewRow^ r = gcnew DataGridViewRow;
+				 DataGridViewCell^ c1 = gcnew DataGridViewTextBoxCell;
+				 DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
+				 DataGridViewCell^ c3 = gcnew DataGridViewTextBoxCell;
+				 DataGridViewCell^ c4 = gcnew DataGridViewTextBoxCell;
+
+				 Item i = h.item;
+
+				 String^ itemName = gcnew String(i.getName().c_str());
+				 String^ iQuantity = Convert::ToString(h.price);
+				 String^ iBought = Convert::ToString(h.numBought);
+				 String^ iSold = Convert::ToString(h.numSold);
+
+				 c1->Value = itemName;
+				 c2->Value = iQuantity;
+				 c3->Value = iBought;
+				 c4->Value = iSold;
+
+				 r->Cells->Add(c1);
+				 r->Cells->Add(c2);
+				 r->Cells->Add(c3);
+				 r->Cells->Add(c4);
+
+				 history->Rows->Add(r);
+			 }
+		 }
+		 
+
 private: System::Void UpdateBuySellCB()
 		 {
 			cbBuyItem->Items->Clear();
@@ -559,6 +677,7 @@ private: System::Void UpdateAll()
 			UpdateBuySellCB();
 			UpdatePlayerDGV();
 			UpdateTownDGV();
+			UpdateHistoryDGV();
 		 }
 
 private: Item getItemFromBuyComboBox()

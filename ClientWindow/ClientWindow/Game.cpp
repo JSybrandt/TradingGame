@@ -151,6 +151,16 @@ void Game::attemptToBuy(Item i, int ammount)
 		getCurrentLocation().buy(i,ammount);
 		getPlayer().incrementGold(-cost);
 		getPlayer().getInventory().increaseNumberOf(i,ammount);
+
+		HistoryTuple h;
+		h.item = i;
+		h.numBought = ammount;
+		h.numSold = 0;
+		h.price = cost;
+
+		std::vector<HistoryTuple>::iterator it;
+		it = getPlayer().getHistory().begin();
+		getPlayer().getHistory().insert(it, h);
 	}
 	//else
 		//throw new INVALID_ORDER;
@@ -164,6 +174,16 @@ void Game::attemptToSell(Item i, int ammount)
 		getCurrentLocation().sell(i,ammount);
 		getPlayer().incrementGold(cost);
 		getPlayer().getInventory().decreaseNumberOf(i,ammount);
+
+		HistoryTuple h;
+		h.item = i;
+		h.numBought = 0;
+		h.numSold = ammount;
+		h.price = cost;
+
+		std::vector<HistoryTuple>::iterator it;
+		it = getPlayer().getHistory().begin();
+		getPlayer().getHistory().insert(it, h);
 	}
 	//else
 		//throw new INVALID_ORDER;
