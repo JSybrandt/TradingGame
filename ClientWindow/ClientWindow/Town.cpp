@@ -1,7 +1,8 @@
 #include "Town.h"
 
-Town::Town(std::string name, vector<Item > itemReference):inventory(itemReference)
+Town::Town(std::string name, vector<Item > itemReference)
 {
+	Inventory::Inventory(itemReference);
 	this->name = name;
 	this->itemReference = itemReference;
 
@@ -43,7 +44,7 @@ void Town::updatePrice(Item i)
 
 int Town::getBuyPrice(Item i)
 {
-	return prices[i]*MARKUP;
+	return prices[i]*(((rand()%25)/100.0)+1);
 }
 
 int Town::getSellPrice(Item i)
@@ -54,9 +55,9 @@ int Town::getSellPrice(Item i)
 //returns the cost of the order
 int Town::buy(Item i, int requestedAmmount)
 {
-	if(inventory.getNumberOf(i) >= requestedAmmount)
+	if(getNumberOf(i) >= requestedAmmount)
 	{
-		inventory.decreaseNumberOf(i,requestedAmmount);
+		decreaseNumberOf(i,requestedAmmount);
 		//record transaction, number of bought items
 		transactionLog[i].numBought+=requestedAmmount;
 		return prices[i]*requestedAmmount;
@@ -69,7 +70,7 @@ int Town::buy(Item i, int requestedAmmount)
 //returns the cost of the order
 int Town::sell(Item i, int requestedAmmount)
 {
-	inventory.increaseNumberOf(i,requestedAmmount);
+	increaseNumberOf(i,requestedAmmount);
 	//record transaction, number of sold items
 	transactionLog[i].numSold+=requestedAmmount;
 	return prices[i]*requestedAmmount;
