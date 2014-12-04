@@ -18,7 +18,7 @@ struct TransactionTuple
 	int numBought,numSold;
 };
 
-class Town
+class Town : public Inventory
 {
 private:
 	std::string name;
@@ -27,11 +27,8 @@ private:
 	vector<Item>itemReference;
 	
 	void updatePrice(Item i);
-	
-	Inventory inventory;
-public:
 
-	
+public:
 
 	Town(std::string name, vector<Item> itemReference);
 
@@ -49,7 +46,6 @@ public:
 	//returns the cost of the order
 	int sell(Item i, int requestedAmmount);
 
-	Inventory& getInventory(){return inventory;}
 
 	bool canTravelTo;
 

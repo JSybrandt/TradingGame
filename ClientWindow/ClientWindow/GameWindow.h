@@ -102,6 +102,11 @@ namespace ClientWindow {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histPrice;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histBuyPrice;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histSellPrice;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  histGold;
+
+
+
+
 
 
 
@@ -180,6 +185,7 @@ namespace ClientWindow {
 			this->histPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->histBuyPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->histSellPrice = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->histGold = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSellNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudBuyNumb))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dgvPlayerInv))->BeginInit();
@@ -189,7 +195,7 @@ namespace ClientWindow {
 			// 
 			// buttTravel
 			// 
-			this->buttTravel->Location = System::Drawing::Point(497, 33);
+			this->buttTravel->Location = System::Drawing::Point(493, 41);
 			this->buttTravel->Name = L"buttTravel";
 			this->buttTravel->Size = System::Drawing::Size(248, 23);
 			this->buttTravel->TabIndex = 18;
@@ -286,7 +292,7 @@ namespace ClientWindow {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(492, 9);
+			this->label4->Location = System::Drawing::Point(490, 17);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(40, 13);
 			this->label4->TabIndex = 6;
@@ -295,7 +301,7 @@ namespace ClientWindow {
 			// cbLocationSelection
 			// 
 			this->cbLocationSelection->FormattingEnabled = true;
-			this->cbLocationSelection->Location = System::Drawing::Point(538, 6);
+			this->cbLocationSelection->Location = System::Drawing::Point(538, 14);
 			this->cbLocationSelection->Name = L"cbLocationSelection";
 			this->cbLocationSelection->Size = System::Drawing::Size(203, 21);
 			this->cbLocationSelection->TabIndex = 5;
@@ -386,7 +392,6 @@ namespace ClientWindow {
 			this->TownSellCol->HeaderText = L"Sell Price";
 			this->TownSellCol->Name = L"TownSellCol";
 			// 
-
 			// label8
 			// 
 			this->label8->AutoSize = true;
@@ -423,8 +428,8 @@ namespace ClientWindow {
 			this->history->AllowUserToResizeColumns = false;
 			this->history->AllowUserToResizeRows = false;
 			this->history->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->history->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {this->histItem, this->histPrice, 
-				this->histBuyPrice, this->histSellPrice});
+			this->history->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {this->histItem, this->histPrice, 
+				this->histBuyPrice, this->histSellPrice, this->histGold});
 			this->history->Location = System::Drawing::Point(751, 160);
 			this->history->Name = L"history";
 			this->history->RowHeadersVisible = false;
@@ -432,7 +437,7 @@ namespace ClientWindow {
 			this->history->ShowCellToolTips = false;
 			this->history->ShowEditingIcon = false;
 			this->history->ShowRowErrors = false;
-			this->history->Size = System::Drawing::Size(436, 392);
+			this->history->Size = System::Drawing::Size(474, 392);
 			this->history->TabIndex = 22;
 			// 
 			// historyLabel
@@ -461,18 +466,26 @@ namespace ClientWindow {
 			this->histBuyPrice->HeaderText = L"Bought";
 			this->histBuyPrice->Name = L"histBuyPrice";
 			this->histBuyPrice->ReadOnly = true;
+			this->histBuyPrice->Width = 75;
 			// 
 			// histSellPrice
 			// 
 			this->histSellPrice->HeaderText = L"Sold";
 			this->histSellPrice->Name = L"histSellPrice";
 			this->histSellPrice->ReadOnly = true;
+			this->histSellPrice->Width = 75;
+			// 
+			// histGold
+			// 
+			this->histGold->HeaderText = L"Gold Remaining";
+			this->histGold->Name = L"histGold";
+			this->histGold->Width = 120;
 			// 
 			// GameWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1199, 556);
+			this->ClientSize = System::Drawing::Size(1234, 556);
 			this->Controls->Add(this->historyLabel);
 			this->Controls->Add(this->history);
 			this->Controls->Add(this->lbCurrLoc);
@@ -520,23 +533,31 @@ private: System::Void buttLoad_Click(System::Object^  sender, System::EventArgs^
 
 private: System::Void buttTravel_Click(System::Object^  sender, System::EventArgs^  e) {
 
-			String ^ selected = cbLocationSelection->Text;
-			std::string selStd;
-			MarshalString(selected,selStd);
+			 try{
+				String ^ selected = cbLocationSelection->Text;
+				std::string selStd;
+				MarshalString(selected,selStd);
 
-			int id = game->getLocationID(selStd);
+				int id = game->getLocationID(selStd);
 
-			game->setCurrentLocation(id);
-
-			 //TODO: actually travel
-			UpdateAll();
-			
-			string event = game->getRandomEvent();
-			String ^EventName = gcnew String(event.c_str());
+				game->setCurrentLocation(id);
+ 
+				string event = game->getRandomEvent();
+				String ^EventName = gcnew String(event.c_str());
 
 
-			MessageBox::Show( "Event happened!!  " + EventName );
+				UpdateAll();
 
+
+				if(game->getDayCount() == 3) {
+					MessageBox::Show("Game over! Your gold after 30 days was: " + (game->getPlayer().getGold()));
+					Application::Exit();
+				}
+
+				MessageBox::Show( "Event happened!!  " + EventName );
+
+			 }catch(...){//do nothing
+			 }
 		 }
 private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs^  e) {
 			game = new Game();
@@ -544,21 +565,7 @@ private: System::Void GameWindow_Load(System::Object^  sender, System::EventArgs
 			rand() %100;
 
 			UpdateAll();
-
-			cbLocationSelection->Items->Add("Newsham");
-			cbLocationSelection->Items->Add("Wolfwater");
-			cbLocationSelection->Items->Add("Oakheart");
-			cbLocationSelection->Items->Add("Aberdeen");
-			cbLocationSelection->Items->Add("Dornwich");
-			cbLocationSelection->Items->Add("Snake's Canyon");
-			cbLocationSelection->Items->Add("Icemeet");
-			cbLocationSelection->Items->Add("Squall's End");
-			cbLocationSelection->Items->Add("Everwinter");
-			cbLocationSelection->Items->Add("Dragontail");	
-
-			Controls->Add(cbLocationSelection);
-
-
+			
 		 }
 
 
@@ -572,7 +579,7 @@ private: System::Void UpdatePlayerDGV()
 				DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
 
 				String^ itemName = gcnew String(i.getName().c_str());
-				String^ itemNumb = Convert::ToString(game->getPlayer().getInventory().getNumberOf(i));
+				String^ itemNumb = Convert::ToString(game->getPlayer().getNumberOf(i));
 
 				c1->Value = itemName;
 				c2->Value = itemNumb;
@@ -589,7 +596,7 @@ private: System::Void UpdateTownDGV()
 			dgvTownInfo->Rows->Clear();
 			for(Item i : *game->getItemReference())
 			{
-				if(game->getCurrentLocation().getInventory().getNumberOf(i) > 0)
+				if(game->getCurrentLocation().getNumberOf(i) > 0)
 				{
 					DataGridViewRow^ r = gcnew DataGridViewRow;
 					DataGridViewCell^ c1 = gcnew DataGridViewTextBoxCell;
@@ -598,7 +605,7 @@ private: System::Void UpdateTownDGV()
 					DataGridViewCell^ c4 = gcnew DataGridViewTextBoxCell;
 
 					String^ itemName = gcnew String(i.getName().c_str());
-					String^ itemNumb = Convert::ToString(game->getCurrentLocation().getInventory().getNumberOf(i));
+					String^ itemNumb = Convert::ToString(game->getCurrentLocation().getNumberOf(i));
 					String^ buyPrice = Convert::ToString(game->getCurrentLocation().getBuyPrice(i));
 					String^ sellPrice = Convert::ToString(game->getCurrentLocation().getSellPrice(i));
 
@@ -628,6 +635,7 @@ private: System::Void UpdateHistoryDGV()
 				 DataGridViewCell^ c2 = gcnew DataGridViewTextBoxCell;
 				 DataGridViewCell^ c3 = gcnew DataGridViewTextBoxCell;
 				 DataGridViewCell^ c4 = gcnew DataGridViewTextBoxCell;
+				 DataGridViewCell^ c5 = gcnew DataGridViewTextBoxCell;
 
 				 Item i = h.item;
 
@@ -635,16 +643,19 @@ private: System::Void UpdateHistoryDGV()
 				 String^ iQuantity = Convert::ToString(h.price);
 				 String^ iBought = Convert::ToString(h.numBought);
 				 String^ iSold = Convert::ToString(h.numSold);
+				 String^ pGold = Convert::ToString(h.gold);
 
 				 c1->Value = itemName;
 				 c2->Value = iQuantity;
 				 c3->Value = iBought;
 				 c4->Value = iSold;
+				 c5->Value = pGold;
 
 				 r->Cells->Add(c1);
 				 r->Cells->Add(c2);
 				 r->Cells->Add(c3);
 				 r->Cells->Add(c4);
+				 r->Cells->Add(c5);
 
 				 history->Rows->Add(r);
 			 }
@@ -658,11 +669,25 @@ private: System::Void UpdateBuySellCB()
 
 			for(Item i : *game->getItemReference())
 			{
-				if(game->getCurrentLocation().getInventory().getNumberOf(i) > 0)
+				if(game->getCurrentLocation().getNumberOf(i) > 0)
 				{
 					String^ item = gcnew String(i.getName().c_str());
 					cbBuyItem->Items->Add(item);
 					cbSellItem->Items->Add(item);
+				}
+			}
+		 }
+
+private: System::Void UpdateTravelCB()
+		 {
+			cbLocationSelection->Items->Clear();
+
+			for(Town &i : game->getTowns())
+			{
+				if(i.canTravelTo)
+				{
+					String^ str = gcnew String(i.getName().c_str());
+					cbLocationSelection->Items->Add(str);
 				}
 			}
 		 }
@@ -681,6 +706,7 @@ private: System::Void UpdateAll()
 			UpdatePlayerDGV();
 			UpdateTownDGV();
 			UpdateHistoryDGV();
+			UpdateTravelCB();
 		 }
 
 private: Item getItemFromBuyComboBox()
@@ -707,6 +733,7 @@ private: Item getItemFromSellComboBox()
 		 }
 private: System::Void buttBuy_Click(System::Object^  sender, System::EventArgs^  e) {
 
+			 try{
 			 Item i = getItemFromBuyComboBox();
 
 			 int amt = Convert::ToInt32(nudBuyNumb->Value);
@@ -717,8 +744,11 @@ private: System::Void buttBuy_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 
 			 UpdateAll();
+			 }catch(...){//donothing
+			 }
 		 }
 private: System::Void buttSell_Click(System::Object^  sender, System::EventArgs^  e) {
+			 try{
 			 Item i = getItemFromSellComboBox();
 
 			 int amt = Convert::ToInt32(nudSellNumb->Value);
@@ -729,7 +759,11 @@ private: System::Void buttSell_Click(System::Object^  sender, System::EventArgs^
 			 }
 
 			 UpdateAll();
+			 }catch(...){//do nothing
+			 }
 		 }
+
+
 
 void MarshalString ( String ^ s, string& os )
 {

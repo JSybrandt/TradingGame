@@ -12,14 +12,14 @@ struct HistoryTuple
 		int numBought;
 		int numSold;
 		int price;
+		int gold;
 };
 
-class Player
+class Player : public Inventory
 {
 private:
 	std::string name;
 	int gold;
-	Inventory inv;
 	
 	vector<HistoryTuple> history;
 
@@ -27,7 +27,6 @@ public:
 	Player(){};
 	Player(std::string,vector<Item> itemReference);
 
-	Inventory& getInventory(){return inv;}
 	vector<HistoryTuple>& getHistory(){return history;}
 	int getGold(){return gold;}
 	void setGold(int n){if(n>0)gold = n;}
